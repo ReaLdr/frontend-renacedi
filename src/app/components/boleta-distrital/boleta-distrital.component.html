@@ -1,0 +1,205 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="layout-main-boleta flex align-items-center justify-content-center">
+            <div class="contenedor">
+                <form [formGroup]="boletaDistritalForm" (submit)="guardarBoletaDistrital()">
+
+
+                    <p-fieldset legend="Datos personales" class="p-2">
+
+                        <div styleClass="w-full" class="md:w-10 mx-auto">
+                            <div class="formgrid grid">
+                                <div class="field col">
+                                    <label for="original">Original</label>
+                                    <input type="radio" formControlName="tipo_boleta" id="original" value="1"
+                                        (change)="tipoBoleta($event);">
+                                </div>
+                                <div class="field col">
+                                    <label for="fotocopia">Fotocopia</label>
+                                    <input type="radio" formControlName="tipo_boleta" id="fotocopia" value="2"
+                                        (change)="tipoBoleta($event);">
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">Folio: </label>
+                                <div class="col-12 md:col-8">
+                                    <p-inputMask [mask]="tipoFolio" formControlName="folio" [disabled]="!ingresarFolio"
+                                        [placeholder]="ingresarFolio ? tipoFolio : 'Tipo(A/F)-999999'"></p-inputMask>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">No. de MRE: </label>
+                                <div class="col-12 md:col-8">
+                                    <p-dropdown [options]="mre" placeholder="Selecciona..." formControlName="mre" optionLabel="mre" required
+                                        styleClass="w-full">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="field grid">
+                                <label for="lastname4" class="col-12 mb-2 md:col-4 md:mb-0">Soy: </label>
+                                <div class="col-12 md:col-8">
+                                    <p-dropdown [options]="soy" placeholder="Selecciona..." optionLabel="genero" formControlName="soySel"
+                                        styleClass="w-full"></p-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="field grid">
+                                <label for="lastname4" class="col-12 mb-2 md:col-4 md:mb-0">Tengo: </label>
+                                <div class="col-12 md:col-8">
+                                    <p-dropdown [options]="edad" placeholder="Selecciona..." optionLabel="edad" formControlName="tengoSel"
+                                        styleClass="w-full"></p-dropdown>
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+                    </p-fieldset>
+
+                    <p-fieldset legend="Boleta de participación de niñas, niños y adolescentes">
+                        <div class="w-full md:w-10 mx-auto">
+
+                            <div class="grid">
+                                <div class="col-12">
+
+                                    <div class="text-center">
+                                        <h5>Para mejorar la colonia, barrio o
+                                            pueblo donde vives ¿qué le hace falta?</h5>
+                                        <h6>Elige tres opciones. Márcalas con
+                                            los
+                                            números 1, 2 y 3, según su importancia.</h6>
+                                        <h6 class="animate__animated animate__zoomIn">Antes de elegir, revisa las diez opciones.</h6>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 md:col-4" *ngFor="let choice of opcionesBoleta; let i=index">
+                                    <div class="opciones-boleta">
+                                        <!-- .card -->
+
+                                        <div class="text-center">
+                                            <!-- <div class="card"></div> -->
+                                            <ul class="check-card">
+                                                <li class="check-card-item">
+                                                    <!-- <input type="checkbox" id="check01" name="check" value="1"> -->
+                                                    <input type="checkbox" name="check" [value]="choice.id_opcion"
+                                                        [id]="'opt'+i" (change)="selectOpcion($event)">
+                                                    <label [for]="'opt'+i" class="radio"></label>
+                                                    <div class="check-card-bg"></div>
+                                                    <div class="check-card-body">
+                                                        <div class="check-card-toggle">
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                        <div class="check-card-cancel">Quitar selección <i
+                                                                class="pi pi-trash"></i></div>
+                                                        <div class="check-card-body-in">
+                                                            <img [src]="choice.nombre_img | imagen:'opcionBoleta'"
+                                                                [alt]="choice.descripcion" class="w-12 mx-0"
+                                                                style="cursor: pointer;" />
+                                                            <!-- <h3 class="check-card-title">
+                                                                {{choice.descripcion}}
+                                                            </h3> -->
+                                                            <p class="check-card-description">
+                                                                {{choice.descripcion}}
+                                                            </p>
+                                                            <div class="wrapper">
+                                                                <span class="posicion">{{posicionSeleccion[i+1].posicion}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div styleClass="w-full" class="md:w-10 mx-auto p-2">
+                                    <div class="field grid" style="align-items: center;">
+                                        <!-- <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0 sm:mb-4">
+                                            <p-badge value="Otro:" severity="success" severity="success"></p-badge>
+                                            <input type="checkbox" name="check" [value]="0" id="opt0"
+                                                (change)="selectOpcion($event)">
+                                        </label> -->
+                                        <p-badge value="Otro " size="xlarge" styleClass="mr-2" title="Si me seleccionas deberás ingresar tu petición"></p-badge>
+                                        <div id="container">
+                                            <div class="toggle">
+                                            <input type="checkbox" name="check" [value]="0"
+                                            id="optn" (change)="selectOpcion($event);" class="check-checkbox">
+                                            <label class="check-label" for="optn"  pTooltip="Si me seleccionas deberás ingresar tu petición">
+                                                <div id="background"></div>
+                                                <span class="face">
+                                                <span class="face-container">
+                                                    <span class="eye left"></span>
+                                                    <span class="eye right"></span>
+                                                    <span class="mouth"></span>
+                                                </span>
+                                                </span>
+                                            </label>
+                                            </div>
+                                        </div>
+
+                                        <div id="input-extra"
+                                            class="col-12 md:col-8 sm:my-3 animate__animated animate__jello"
+                                            *ngIf="otro">
+                                            <!-- <p-dropdown [options]="demarcacion_territorial" formControlName="alcaldiaSel"
+                                                optionLabel="nombre_demarcacion" required styleClass="w-full">
+                                            </p-dropdown> -->
+                                            <span class="p-float-label">
+                                                <textarea id="float-input" rows="5" cols="30" formControlName="otro"
+                                                    class="w-full" pInputTextarea maxlength="500"></textarea>
+                                                <label for="float-input">Descríbelo</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AQUI -->
+
+                                <div styleClass="w-full" class="md:w-10 mx-auto">
+                                    <div class="field grid">
+                                        <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">Observaciones:
+                                        </label>
+                                        <div class="col-12 md:col-8">
+                                            <textarea rows="5" cols="30" maxlength="500" formControlName="observacion" pInputTextarea autoResize="autoResize"
+                                                class="w-full"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="field grid">
+                                        <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">Adjuntar archivo:
+                                        </label>
+                                        <div class="col-12 md:col-8">
+                                            <p-fileUpload name="files" [multiple]="false" accept="application/pdf"
+                                                maxFileSize="10000000" fileLimit="1"
+                                                invalidFileLimitMessageSummary="Número máximo de archivos excedido"
+                                                invalidFileLimitMessageDetail="El límite es 2 como máximo."
+                                                invalidFileTypeMessageDetail="tipos de archivos permitidos: PDF"
+                                                invalidFileTypeMessageSummary="Tipo de archivo no admitido"
+                                                [showUploadButton]="false" chooseLabel="Seleccionar"
+                                                cancelLabel="Cancelar y limpiar"
+                                                (onSelect)="dealWithFiles($event)">
+                                                <ng-template pTemplate="content">
+                                                    <ul *ngIf="uploadedFiles.length">
+                                                        <li *ngFor="let file of uploadedFiles">{{file.name}} -
+                                                            {{file.size}} bytes</li>
+                                                    </ul>
+                                                </ng-template>
+                                            </p-fileUpload>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <button type="submit" [disabled]="!boletaDistritalForm.valid" #enviado pButton pRipple
+                                label="Guardar y/o enviar respuestas" class="w-full p-3 text-xl"
+                                iconPos="right" [loading]="loading"></button>
+                        </div>
+                    </p-fieldset>
+                </form>
+                <!-- <pre> {{boletaDistritalForm.value | json}} </pre> -->
+
+            </div>
+        </div>
+    </div>
+</div>

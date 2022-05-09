@@ -1,0 +1,22 @@
+<div class="grid p-fluid">
+    
+    <div *ngIf="cargando" class="col-12">
+        <div class="flex align-items-center justify-content-center border-round" style="height: 2.5rem;">
+            <i class="pi pi-spin pi-spinner text-orange-500 text-xl"></i>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card mb-0">
+            <h5>Opciones más seleccionadas</h5>
+            <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions"></canvas>
+        </div>
+    </div>
+    
+    <div class="col-12">
+        <div class="card mb-0">
+            <h5>Preferencias por grupo de edad</h5>
+            <canvas baseChart [data]="radarChartData" [type]="radarChartType" [options]="radarChartOptions"></canvas>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,69 @@
+<div class="grid">
+    <div class="col-10">
+        <div class="layout-main-boleta flex align-items-center justify-content-center">
+            <div class="contenedor">
+                <!-- Comienza tabla -->
+                <div class="card">
+                    <h5>Folios repetidos: {{total_folios_repetidos}}</h5>
+                    <p-table [value]="boletasRepetidas" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                        responsiveLayout="scroll"
+                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} filas"
+                        [rowsPerPageOptions]="[10,25,50]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Folio</th>
+                                <th>Tipo</th>
+                                <th># veces repetido</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-folio>
+                            <tr>
+                                <td>
+                                    <button pButton type="button" [label]="folio.folio" class="p-button-link"
+                                        (click)="listarDistritosRelacionados(folio)"></button>
+                                </td>
+                                <td>{{arrTipoBoleta[folio.tipo_boleta]}}</td>
+                                <td>{{folio.recuento}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <!-- Termina tabla -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <h5>Folio</h5> -->
+<!-- <p-button (click)="showBasicDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
+
+
+<p-dialog [header]="'Folio ' + folioActive" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <p-table [value]="listadoFoliosYDistritos" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Distrito</th>
+                <th>ID Boleta</th>
+                <th>Eliminar</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td>{{row.id_distrito}}</td>
+                <td>{{row.id_boleta}}</td>
+                <td><button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="eliminarFolio(row)"></button></td>
+            </tr>
+            <tr *ngIf="ultimo_folio_repetido">
+                <p-message severity="warn" text="¡Cuidado! este folio ya no se encuentra duplicado y dejará de aparecer en el listado (folios repetidos)" styleClass="mr-2"></p-message> 
+            </tr>
+        </ng-template>
+    </p-table>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-times" (click)="displayPosition=false" label="Cerrar" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
+
+
+<p-toast position="top-center"></p-toast>
