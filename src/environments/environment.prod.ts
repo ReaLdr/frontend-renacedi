@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  nombre_sistema: 'Consulta para niñas, niños y Adolescentes 2022',
-  baseUrl: 'https://app.iecm.mx:3010/api',
+  nombre_sistema: 'Red Nacional de Consejeras y Consejeros Electorales por una Democracia Incluyente',
+  baseUrl: 'https://app.iecm.mx:3012/api',
   baseRpt: 'https://app.iecm.mx/consultaInfantil2022/',
-  version: ''
+  version: ' | UTSI • v0.0.1'
 };

@@ -1,0 +1,109 @@
+<div class="layout-main-boleta flex align-items-center justify-content-center">
+    <div class="contenedor">
+        <form [formGroup]="boletaForm" (submit)="guardarBoleta();">
+
+            <p-fieldset legend="Boleta de participación de niñas, niños y adolescentes">
+                <div class="w-full md:w-10 mx-auto">
+
+                    <div class="grid">
+                        <div class="col-12">
+
+                            <div class="text-center">
+                                <h5>Para mejorar la colonia, barrio o
+                                    pueblo donde vives ¿qué le hace falta?</h5>
+                                <h6>Elige cinco (5) opciones. Serán marcadas con los números 1, 2, 3, 4 y 5.</h6>
+                                <h6 class="animate__animated animate__zoomIn">Antes de elegir, revisa las (N) opciones.</h6>
+                            </div>
+
+                        </div>
+
+                        <!-- {{ posicionSeleccion | json }} -->
+
+                        <div class="col-12 md:col-4" *ngFor="let choice of opcionesBoleta; let i=index">
+                            <div class="surface-border opciones-boleta">
+                                <!-- .card -->
+
+                                <div class="text-center">
+                                    <!-- <div class="card"></div> -->
+                                    <ul class="check-card">
+                                        <li class="check-card-item">
+                                            <!-- <input type="checkbox" id="check01" name="check" value="1"> -->
+                                            <input type="checkbox" name="check" [value]="choice.id_opcion"
+                                                [id]="'opt'+i" (change)="selectOpcion($event)">
+                                            <label [for]="'opt'+i" class="radio"></label>
+                                            <div class="check-card-bg"></div>
+                                            <div class="check-card-body">
+                                                <div class="check-card-toggle">
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                                <div class="check-card-cancel">Quitar selección <i
+                                                    class="pi pi-trash"></i></div>
+                                                <div class="check-card-body-in">
+                                                    <img [src]="choice.nombre_img | imagen:'opcionBoleta'"
+                                                        [alt]="choice.descripcion" class="w-12 mx-0"
+                                                        style="cursor: pointer;" />
+                                                    <h6 class="check-card-title text-lg">
+                                                        {{choice.nombre_candidatx}}
+                                                    </h6>
+                                                    <p class="check-card-description text-base">
+                                                        {{choice.ople_siglas}}
+                                                    </p>
+                                                    <div class="wrapper">
+                                                        <span class="posicion">{{posicionSeleccion[i+1].posicion}}</span>
+                                                    </div>
+                                                    <!-- <small class="posicion">[{{posicionSeleccion[i+1].posicion}}]</small> -->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div styleClass="w-full" class="md:w-10 mx-auto p-2">
+                            <div class="field grid" style="align-items: center;">
+                                <p-badge value="Otro " size="xlarge" styleClass="mr-2" title="Si me seleccionas deberás ingresar tu petición"></p-badge>
+                                <div id="container">
+                                    <div class="toggle">
+                                      <input type="checkbox" name="check" [value]="0"
+                                      id="optn" (change)="selectOpcion($event);" class="check-checkbox">
+                                      <label class="check-label" for="optn"  pTooltip="Si me seleccionas deberás ingresar tu petición">
+                                        <div id="background"></div>
+                                        <span class="face">
+                                          <span class="face-container">
+                                            <span class="eye left"></span>
+                                            <span class="eye right"></span>
+                                            <span class="mouth"></span>
+                                          </span>
+                                        </span>
+                                      </label>
+                                    </div>
+                                </div>
+                                
+                                <div id="input-extra" class="col-12 md:col-8 sm:my-3 animate__animated animate__jello mt-2" *ngIf="otro">
+                                    <span class="p-float-label">
+                                        <textarea id="float-input" rows="5" cols="30" maxlength="500"formControlName="otro" class="w-full" pInputTextarea></textarea>
+                                        <label for="float-input">Descríbelo</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                    </div>
+
+                    <button type="submit" #enviado [disabled]="!boletaForm.valid" pButton pRipple label="Guardar y/o enviar respuesta"
+                        class="w-full p-3 text-xl"
+                        iconPos="right" [loading]="loading"></button>
+                </div>
+                <!-- <pre>
+                    {{ boletaForm.value | json }}
+                    {{ boletaForm.valid | json }}
+                </pre> -->
+            </p-fieldset>
+        </form>
+
+    </div>
+</div>

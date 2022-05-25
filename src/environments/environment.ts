@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  nombre_sistema: 'Consulta para niñas, niños y adolescentes 2022 - Dev',
-  baseUrl: 'http://localhost:3010/api',
+  nombre_sistema: 'Red Nacional de Consejeras y Consejeros Electorales por una Democracia Incluyente',
+  baseUrl: 'http://localhost:3012/api',
   baseRpt: 'http://localhost/2022/consulta-infantil-juvenil-2022/frontend-consulta-ij-2022/',
-  version: ' | UTSI • v2.5.1'
+  version: ' | UTSI • v0.0.1'
 };
 
 /*

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppMainComponent } from 'src/app/app.main.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,8 @@ import { AppMainComponent } from 'src/app/app.main.component';
   ]
 })
 export class HeaderComponent {
+
+  public nombre_sistema = environment.nombre_sistema;
 
   constructor(public appMain: AppMainComponent) { }
 

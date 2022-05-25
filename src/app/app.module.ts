@@ -15,6 +15,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { Footer } from 'primeng/api';
 import { PipesModule } from './pipes/pipes.module';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
+import { AuthModule } from './auth/auth.module';
 // import { BoletaPublicaComponent } from './components/boleta-publica/boleta-publica.component';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PrimeNgModule } from './prime-ng/prime-ng.module';
         BrowserAnimationsModule,
         AppRoutingModule,
         ComponentsModule,
+        AuthModule,
         PipesModule
     ],
     exports: [

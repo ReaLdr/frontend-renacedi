@@ -5,18 +5,25 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AdminLoginComponent
+  ],
   imports: [
     CommonModule,
-    AuthRoutingModule,
+    PrimeNgModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    PrimeNgModule
+    AuthRoutingModule,
   ],
-  exports: []
+  exports: [
+    AdminLoginComponent
+  ]
 })
 export class AuthModule { }

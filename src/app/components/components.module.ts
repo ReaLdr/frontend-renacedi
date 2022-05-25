@@ -24,6 +24,8 @@ import { BienvenidxComponent } from './bienvenidx/bienvenidx.component';
 import { CapturaActasComponent } from './captura-actas/captura-actas.component';
 import { GraficasComponent } from './graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritales/listado-boletas-distritales.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { BoletaComponent } from './boleta/boleta.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritale
     CapturaActasComponent,
     GraficasComponent,
     ListadoBoletasDistritalesComponent,
+    ConfiguracionComponent,
+    BoletaComponent,
   ],
   imports: [
     CommonModule,

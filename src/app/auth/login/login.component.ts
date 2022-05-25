@@ -37,10 +37,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  nombre_sistema: string = environment.nombre_sistema;
+
   loading: boolean = false;
 
   loginForm: FormGroup = this.fb.group({
-    usuario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    correo: ['dilemajire@gmail.com', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
     contrasena: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
   });
 
@@ -73,13 +75,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(){
 
-    const usuario = this.loginForm.controls['usuario'].value;
+    const correo = this.loginForm.controls['correo'].value;
     const contrasena = this.loginForm.controls['contrasena'].value;
     this.loading = true;
     
 
-    if(!usuario || !contrasena){
-      Swal.fire('Ups', 'Ingresa un usuario y contraseña', 'warning');
+    if(!correo || !contrasena){
+      Swal.fire('Ups', 'Ingresa un correo y contraseña', 'warning');
       this.loading = false;
       return;
     }
@@ -87,7 +89,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.usuarioService.login( this.loginForm.value )
       .subscribe( resp => {
 
-        this.router.navigateByUrl('/main');
+        this.router.navigateByUrl('/vote');
         
       }, (err) => {
         this.loading = false;

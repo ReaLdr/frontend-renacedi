@@ -8,24 +8,31 @@ import { AuthGuard } from './guards/auth.guard';
 import { BoletaDistritalComponent } from './components/boleta-distrital/boleta-distrital.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { AdminGuard } from './guards/admin.guard';
-import { BienvenidxComponent } from './components/bienvenidx/bienvenidx.component';
+// import { BienvenidxComponent } from './components/bienvenidx/bienvenidx.component';
 import { CapturaActasComponent } from './components/captura-actas/captura-actas.component';
 import { GraficasComponent } from './components/graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './components/listado-boletas-distritales/listado-boletas-distritales.component';
 import { CentralGuard } from './guards/central.guard';
 import { SystemGuard } from './guards/system.guard';
+import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
+import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
+import { BoletaComponent } from './components/boleta/boleta.component';
 
 const routes: Routes = [
     {
-        path: '',
-        component: BienvenidxComponent
+        path: 'login',
+        component: LoginComponent
     },
     {
-        path: 'main', component: AppMainComponent,
+        path: 'administracion-sistema',
+        component: AdminLoginComponent
+    },
+    {
+        path: 'vote', component: AppMainComponent,
         children: [
             { path: '', component: DashboardComponent },
             { path: 'graficas', component: GraficasComponent },
-            { path: 'sistematizacion-boleta', component: BoletaDistritalComponent, canActivate: [AdminGuard] },
+            { path: 'boleta', component: BoletaComponent, canActivate: [AdminGuard] },
             { path: 'captura-actas', component: CapturaActasComponent, canActivate: [AdminGuard] },
             { path: 'editar-captura-acta/:id_mesa', component: CapturaActasComponent, canActivate: [AdminGuard] },
             { path: 'reportes', component: ReportesComponent },
@@ -34,9 +41,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         canLoad: [AuthGuard]
     },
-    { path: 'login', component: LoginComponent },
+    {
+        path: 'configuracion', component: AppMainComponent
+    },
     { path: 'boleta', component: BoletaPublicaComponent, canActivate: [SystemGuard] },
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'login' }
 ]
 
 @NgModule({
