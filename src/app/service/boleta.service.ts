@@ -43,9 +43,9 @@ export class BoletaService {
       )
   }
 
-  guardarBoletaPublica( data: BoletaPublica ){
+  guardarBoleta( data: BoletaPublica ){
     const url = `${base_url}/boleta`;
-    return this.http.post( url, data );
+    return this.http.post( url, data, this.headers );
   }
   
   guardarBoletaDistrital( data: BoletaDistrital ){

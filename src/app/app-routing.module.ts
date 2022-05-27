@@ -13,8 +13,6 @@ import { CentralGuard } from './guards/central.guard';
 import { SystemGuard } from './guards/system.guard';
 import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
 // import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
-import { BoletaComponent } from './components/boleta/boleta.component';
-import { BoletaTestComponent } from './components/boleta-test/boleta-test.component';
 import { Boleta1Component } from './components/boleta1/boleta1.component';
 
 const routes: Routes = [
@@ -22,6 +20,7 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent
     },
+    { path: 'emitir-voto', component: Boleta1Component, canActivate: [AuthGuard], canLoad: [AuthGuard] },
     {
         path: 'login-admin',
         component: AdminLoginComponent
@@ -32,7 +31,7 @@ const routes: Routes = [
         children: [
             { path: '', component: DashboardComponent },
             { path: 'graficas', component: GraficasComponent },
-            { path: 'boleta', component: BoletaComponent, canActivate: [AdminGuard] },
+            // { path: 'boleta', component: BoletaComponent, canActivate: [AdminGuard] },
             { path: 'captura-actas', component: CapturaActasComponent, canActivate: [AdminGuard] },
             { path: 'editar-captura-acta/:id_mesa', component: CapturaActasComponent, canActivate: [AdminGuard] },
             { path: 'reportes', component: ReportesComponent },
@@ -41,9 +40,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         canLoad: [AuthGuard]
     },
-    // { path: 'boleta', component: BoletaPublicaComponent, canActivate: [SystemGuard] },
-    // { path: 'test', component: BoletaTestComponent },
-    { path: 'emitir-voto', component: Boleta1Component, canActivate: [AuthGuard], canLoad: [AuthGuard] },
     { path: '**', redirectTo: 'login' }
 ]
 

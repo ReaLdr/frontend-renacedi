@@ -96,7 +96,8 @@
 	.check-card .check-card-body{
 		/* min-height: 350px; */
 		min-height: 295px;
-    	max-height: 340px;
+    	/* max-height: 340px; */
+		max-height: 355px;
 	}
 }
 
@@ -152,15 +153,10 @@
 .check-card .check-card-bg,
 .check-card .check-card-toggle {
 	position: relative;
-	/* background: #2e2d37; */
-    /* background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
-    /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
-	width: 36px;
-	height: 36px;
-	top: 8px;
-	/* top: 10px; */
-	left: 8px;
-	/* left: 10px; */
+	width: 30px;
+	height: 30px;
+	top: 5px;
+	left: 5px;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 }
@@ -229,7 +225,7 @@
 	transform:scale(30);
 }
 .check-card input[type=checkbox]:checked ~ .check-card-body .check-card-cancel {
-	bottom: 22rem;
+	bottom: 0rem;
 }
 
 /* .check-card input[type=checkbox]:checked ~ .check-card-body .check-card-number-position {

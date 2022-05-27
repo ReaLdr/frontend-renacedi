@@ -11,22 +11,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { LoginComponent } from '../auth/login/login.component';
 import { HeaderComponent } from '../shared/header/header.component';
-import { BoletaPublicaComponent } from './boleta-publica/boleta-publica.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from '../pipes/pipes.module';
-import { BoletaDistritalComponent } from './boleta-distrital/boleta-distrital.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ReportesComponent } from './reportes/reportes.component';
-import { BienvenidxComponent } from './bienvenidx/bienvenidx.component';
 import { CapturaActasComponent } from './captura-actas/captura-actas.component';
 import { GraficasComponent } from './graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritales/listado-boletas-distritales.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
-import { BoletaComponent } from './boleta/boleta.component';
-import { BoletaTestComponent } from './boleta-test/boleta-test.component';
 import { Boleta1Component } from './boleta1/boleta1.component';
 
 @NgModule({
@@ -40,16 +35,11 @@ import { Boleta1Component } from './boleta1/boleta1.component';
     DashboardComponent,
     LoginComponent,
     HeaderComponent,
-    BoletaPublicaComponent,
-    BoletaDistritalComponent,
     ReportesComponent,
-    BienvenidxComponent,
     CapturaActasComponent,
     GraficasComponent,
     ListadoBoletasDistritalesComponent,
     ConfiguracionComponent,
-    BoletaComponent,
-    BoletaTestComponent,
     Boleta1Component,
   ],
   imports: [
@@ -72,8 +62,7 @@ import { Boleta1Component } from './boleta1/boleta1.component';
     AppMenuitemComponent,
     DashboardComponent,
     LoginComponent,
-    HeaderComponent,
-    BoletaPublicaComponent
+    HeaderComponent
   ]
 })
 export class ComponentsModule { }

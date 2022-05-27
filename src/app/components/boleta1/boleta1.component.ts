@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { OpcionesBoleta } from 'src/app/interfaces/opciones-boleta.interface';
+import { BoletaService } from 'src/app/service/boleta.service';
+import { UsuarioService } from 'src/app/service/usuario.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
@@ -28,6 +30,18 @@ import Swal from 'sweetalert2';
     :host ::ng-deep .custom-toast .p-toast-top-right {
       top: 125px;
     }
+
+    .hover-card:hover {
+      /* transform: scale(1.15); */
+      opacity: .95;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .textos {
+      /* padding-bottom: 0.5em !important; */
+      height: 4.5em;
+    }
   `
   ],
   styleUrls: ['boleta1.component.css', '../../shared/checkbox.animated.scss', '../../shared/numero-posicion.scss'],
@@ -43,6 +57,9 @@ export class Boleta1Component implements OnInit {
 
 
   loading: boolean = false;
+
+  items: MenuItem[];
+
 
 
   arrOpcionesSeleccionadas: number[] = [];
@@ -115,9 +132,35 @@ export class Boleta1Component implements OnInit {
     { opcion: 9, posicion: null }
   ];
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private router: Router) { }
+  constructor( private fb: FormBuilder,
+               private messageService: MessageService,
+               private router: Router,
+               private boletaService: BoletaService,
+               private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+
+    this.items = [
+      {
+          label: 'Update',
+          icon: 'pi pi-refresh'
+      },
+      {
+          label: 'Delete',
+          icon: 'pi pi-times'
+      },
+      {
+          label: 'Angular',
+          icon: 'pi pi-external-link',
+          url: 'http://angular.io'
+      },
+      {
+          label: 'Router',
+          icon: 'pi pi-upload',
+          routerLink: '/fileupload'
+      }
+  ];
+
   }
 
   selectOpcion(event) {
@@ -226,40 +269,30 @@ export class Boleta1Component implements OnInit {
 
       // console.log(data);
 
-      Swal.fire({
-        icon: 'success',
-        title: '¡GRACIAS POR PARTICIPAR!',
-        html: 'Tu opinión se guardó correctamente',
-        allowOutsideClick: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // this.router.navigateByUrl('boleta1');
-          location.reload();
-        }
-      });
+      const data = this.boletaForm.value;
 
+      this.boletaService.guardarBoleta(data)
+        .subscribe( resp => {
 
-      /*this.boletaService.guardarBoletaPublica(data)
-        .subscribe(resp => {
           // console.log(resp);
-          Swal.fire(
-            '¡GRACIAS POR PARTICIPAR!',
-            'Tu opinión se guardó correctamente',
-            'success').then((result) => {
-              if (result.isConfirmed) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡GRACIAS POR PARTICIPAR!',
+            html: 'Tu opinión se guardó correctamente',
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // this.router.navigateByUrl('boleta1');
+              this.cerrarSesion();
+            }
+          });
 
-                this.router.navigateByUrl('/');
-
-              }
-            });
-          // TODO: Bloquear boton, resetear opciones seleccionadas
-          // this.boletaForm.reset();
         }, (err) => {
           console.log(err);
           this.loading = false;
           Swal.fire('Error', err.error.msg, 'error');
 
-        }); */
+        });
 
     }
 
@@ -276,13 +309,17 @@ export class Boleta1Component implements OnInit {
     (opciones_por_elegir === 1 ? txt_quedan = 'Queda' : txt_quedan = 'Quedan');
 
 
-    this.messageService.add({ severity: 'info', summary: txt_quedan, detail: `${opciones_por_elegir + ' ' + txt_opc } por elegir`, sticky: true });
+    this.messageService.add({ severity: 'info', summary: txt_quedan, detail: `${opciones_por_elegir + ' ' + txt_opc} por elegir`, sticky: true });
 
     if (opciones_por_elegir === 0) {
       this.messageService.clear();
       this.messageService.add({ severity: 'success', summary: 'Listo', detail: 'Ha seleccionado sus 5 opciones' });
     }
 
+  }
+
+  cerrarSesion(){
+    this.usuarioService.logOut();
   }
 
 }

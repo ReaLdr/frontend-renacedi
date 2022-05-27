@@ -11,8 +11,24 @@
 </div>
 
 
+
 <div class="layout-main-boleta flex align-items-center justify-content-center">
     <div class="contenedor">
+
+        <p-toolbar class="p-1">
+            <div class="p-toolbar-group-left">
+                <span>
+                    <!-- TODO: Temporizador -->
+                    <p-tag icon="pi pi-clock" severity="danger" value="Tiempo restante para emitir tu voto: 00:08:10">
+                    </p-tag>
+                </span>
+            </div>
+
+            <div class="p-toolbar-group-right">
+                <p-button label="Cerrar sesión" icon="pi pi-sign-out" (click)="cerrarSesion();"></p-button>
+            </div>
+        </p-toolbar>
+
         <form [formGroup]="boletaForm" (submit)="emitirVoto();">
 
             <p-fieldset [legend]="titulo_fieldset">
@@ -36,7 +52,7 @@
 
                                 <div class="text-center">
                                     <!-- <div class="card"></div> -->
-                                    <ul class="card check-card">
+                                    <ul class="card check-card hover-card">
                                         <!-- .card -->
                                         <li class="check-card-item">
                                             <!-- <input type="checkbox" id="check01" name="check" value="1"> -->
@@ -49,23 +65,29 @@
                                                     <span></span>
                                                     <span></span>
                                                 </div>
-                                                <div class="check-card-cancel">Quitar selección <i
-                                                        class="pi pi-trash"></i></div>
                                                 <div class="check-card-body-in">
+                                                    <div class="textos">
+                                                        <h6 class="check-card-title text-lg">
+                                                            {{choice.nombre_candidatx}}
+                                                        </h6>
+                                                        <p class="check-card-description text-base">
+                                                            {{choice.ople_siglas}} - {{choice.ople_siglas}}
+                                                        </p>
+                                                    </div>
+
                                                     <img [src]="choice.nombre_img | imagen:'opcionBoleta'"
                                                         [alt]="choice.descripcion" class="w-12 mx-0"
                                                         style="cursor: pointer;" />
-                                                    <h6 class="check-card-title text-lg">
-                                                        {{choice.nombre_candidatx}}
-                                                    </h6>
-                                                    <p class="check-card-description text-base">
-                                                        {{choice.ople_siglas}}
-                                                    </p>
                                                     <div class="wrapper">
                                                         <span
                                                             class="posicion">{{posicionSeleccion[i+1].posicion}}</span>
                                                     </div>
                                                     <!-- <small class="posicion">[{{posicionSeleccion[i+1].posicion}}]</small> -->
+                                                </div>
+                                                <div class="check-card-cancel">
+                                                    <small>
+                                                        Quitar selección <i class="pi pi-trash"></i>
+                                                    </small>
                                                 </div>
                                             </div>
                                         </li>
@@ -82,8 +104,8 @@
 
                     <!-- <button type="submit" pButton pRipple
                         label="Ver resumen de selección" class=" p-button-success p-3" styleClass="p-button-sm"></button> -->
-                    
-                        <button type="submit" #enviado [disabled]="!boletaForm.valid" pButton pRipple
+
+                    <button type="submit" #enviado [disabled]="!boletaForm.valid" pButton pRipple
                         label="Guardar y/o enviar respuestas" class="w-full mt-2 p-3 text-xl" iconPos="right"
                         [loading]="loading"></button>
                 </div>

@@ -94,7 +94,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       }, (err) => {
         this.loading = false;
         console.log(err);
-        Swal.fire('Error', err.error.msg, 'error');
+        if(err.error.flag === 2){
+          Swal.fire('Ups', err.error.msg, 'info');
+        } else{
+          Swal.fire('Error', err.error.msg, 'error');
+        }
       })
     // console.log(this.loginForm.value);
     

@@ -31,11 +31,11 @@
             
                 <div class="w-full md:w-10 mx-auto">
                     <form [formGroup]="loginForm" (submit)="login();">
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuario</label>
-                        <input id="email1" type="text" formControlName="correo" maxlength="20" pInputText class="w-full mb-3" style="padding:1rem;">
+                        <label for="email" class="block text-900 text-xl font-medium mb-2">Usuario</label>
+                        <input id="email" type="text" formControlName="correo" maxlength="30" pInputText class="w-full mb-3" style="padding:1rem;">
                 
-                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
-                        <p-password id="password1" formControlName="contrasena" [maxlength]="20" [toggleMask]="false" [feedback]="false" styleClass="w-full mb-3"></p-password>
+                        <label for="password" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
+                        <p-password id="password" formControlName="contrasena" [maxlength]="30" [toggleMask]="false" [feedback]="false" styleClass="w-full mb-3"></p-password>
                         <button pButton pRipple [loading]="loading" iconPos="right" type="submit" [disabled]="!loginForm.valid" label="Ingresar" class="w-full p-3 text-xl"></button>
                     </form>
                 </div>
