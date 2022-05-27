@@ -1,0 +1,109 @@
+<!-- HEADER -->
+<div class="layout-header">
+    <div class="layout-header-logo">
+        <img src="assets/layout/images/iecm/iecm-10-pp.png"
+            alt="Logo conmemorativo a los 10 años del presupuesto participativo">
+        <img src="assets/layout/images/iecm/renacedi-header.png" alt="Logo RENACEDI">
+    </div>
+    <div class="layout-header-nombre-sistema text-indigo-400">
+        <h1> {{nombre_sistema}} </h1>
+    </div>
+</div>
+
+
+<div class="layout-main-boleta flex align-items-center justify-content-center">
+    <div class="contenedor">
+        <form [formGroup]="boletaForm" (submit)="emitirVoto();">
+
+            <p-fieldset [legend]="titulo_fieldset">
+                <div class="w-full md:w-10 mx-auto">
+
+                    <div class="grid">
+                        <div class="col-12">
+
+                            <div class="text-center">
+                                <h5>{{texto1}}</h5>
+                                <h6 class="animate__animated animate__zoomIn">{{texto2}}</h6>
+                            </div>
+
+                        </div>
+
+                        <!-- {{ posicionSeleccion | json }} -->
+
+                        <div class="col-12 md:col-4 animate__animated animate__fadeIn"
+                            *ngFor="let choice of opcionesBoleta; let i=index">
+                            <div class="surface-border opciones-boleta">
+
+                                <div class="text-center">
+                                    <!-- <div class="card"></div> -->
+                                    <ul class="card check-card">
+                                        <!-- .card -->
+                                        <li class="check-card-item">
+                                            <!-- <input type="checkbox" id="check01" name="check" value="1"> -->
+                                            <input type="checkbox" name="check" [value]="choice.id_opcion"
+                                                [id]="'opt'+i" (change)="selectOpcion($event)">
+                                            <label [for]="'opt'+i" class="radio"></label>
+                                            <div class="check-card-bg"></div>
+                                            <div class="check-card-body">
+                                                <div class="check-card-toggle">
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                                <div class="check-card-cancel">Quitar selección <i
+                                                        class="pi pi-trash"></i></div>
+                                                <div class="check-card-body-in">
+                                                    <img [src]="choice.nombre_img | imagen:'opcionBoleta'"
+                                                        [alt]="choice.descripcion" class="w-12 mx-0"
+                                                        style="cursor: pointer;" />
+                                                    <h6 class="check-card-title text-lg">
+                                                        {{choice.nombre_candidatx}}
+                                                    </h6>
+                                                    <p class="check-card-description text-base">
+                                                        {{choice.ople_siglas}}
+                                                    </p>
+                                                    <div class="wrapper">
+                                                        <span
+                                                            class="posicion">{{posicionSeleccion[i+1].posicion}}</span>
+                                                    </div>
+                                                    <!-- <small class="posicion">[{{posicionSeleccion[i+1].posicion}}]</small> -->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <p-toast class="custom-toast"></p-toast>
+
+                    <!-- <button type="submit" pButton pRipple
+                        label="Ver resumen de selección" class=" p-button-success p-3" styleClass="p-button-sm"></button> -->
+                    
+                        <button type="submit" #enviado [disabled]="!boletaForm.valid" pButton pRipple
+                        label="Guardar y/o enviar respuestas" class="w-full mt-2 p-3 text-xl" iconPos="right"
+                        [loading]="loading"></button>
+                </div>
+            </p-fieldset>
+        </form>
+        <!-- <pre> {{boletaForm.value | json}} </pre> -->
+
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="surface-0">
+    <div class="grid justify-content-center" style="margin: 0;">
+        <p-divider></p-divider>
+        <div class="col-12 xl:col-6 text-center">
+            <span class="font-medium">Instituto Electoral de la Ciudad de México &bull; Huizaches 25 &bull; Rancho Los
+                Colorines &bull; Tlalpan &bull; C.P. 14386 &bull; Ciudad de México &bull; Conmutador: (55) 5483
+                3800{{version}} </span>
+        </div>
+    </div>
+</div>
+<p-scrollTop [threshold]="150"></p-scrollTop>
+<!-- Footer -->

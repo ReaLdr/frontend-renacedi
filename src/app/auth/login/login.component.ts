@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.usuarioService.login( this.loginForm.value )
       .subscribe( resp => {
 
-        this.router.navigateByUrl('/vote');
+        this.router.navigateByUrl('/emitir-voto');
         
       }, (err) => {
         this.loading = false;

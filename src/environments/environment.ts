@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  nombre_sistema: 'Red Nacional de Consejeras y Consejeros Electorales por una Democracia Incluyente',
+  nombre_sistema: 'Sistema de Votación para Organizaciones Ciudadanas',
   baseUrl: 'http://localhost:3012/api',
   baseRpt: 'http://localhost/2022/consulta-infantil-juvenil-2022/frontend-consulta-ij-2022/',
+  textoFieldest: 'Boleta de participación',
+  texto1: 'Con la finalidad de elegir a las Consejeras y los Consejeros Electorales',
+  texto2: 'Elige cinco opciones',
   version: ' | UTSI • v0.0.1'
 };
 

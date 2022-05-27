@@ -26,6 +26,8 @@ import { GraficasComponent } from './graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritales/listado-boletas-distritales.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { BoletaComponent } from './boleta/boleta.component';
+import { BoletaTestComponent } from './boleta-test/boleta-test.component';
+import { Boleta1Component } from './boleta1/boleta1.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { BoletaComponent } from './boleta/boleta.component';
     ListadoBoletasDistritalesComponent,
     ConfiguracionComponent,
     BoletaComponent,
+    BoletaTestComponent,
+    Boleta1Component,
   ],
   imports: [
     CommonModule,

@@ -3,20 +3,19 @@ import { NgModule } from '@angular/core';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AppMainComponent } from './app.main.component';
 import { LoginComponent } from './auth/login/login.component';
-import { BoletaPublicaComponent } from './components/boleta-publica/boleta-publica.component';
 import { AuthGuard } from './guards/auth.guard';
-import { BoletaDistritalComponent } from './components/boleta-distrital/boleta-distrital.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { AdminGuard } from './guards/admin.guard';
-// import { BienvenidxComponent } from './components/bienvenidx/bienvenidx.component';
 import { CapturaActasComponent } from './components/captura-actas/captura-actas.component';
 import { GraficasComponent } from './components/graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './components/listado-boletas-distritales/listado-boletas-distritales.component';
 import { CentralGuard } from './guards/central.guard';
 import { SystemGuard } from './guards/system.guard';
 import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
-import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
+// import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
+import { BoletaTestComponent } from './components/boleta-test/boleta-test.component';
+import { Boleta1Component } from './components/boleta1/boleta1.component';
 
 const routes: Routes = [
     {
@@ -24,11 +23,12 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'administracion-sistema',
+        path: 'login-admin',
         component: AdminLoginComponent
     },
     {
-        path: 'vote', component: AppMainComponent,
+        path: 'administracion-sistema',
+        component: AppMainComponent,
         children: [
             { path: '', component: DashboardComponent },
             { path: 'graficas', component: GraficasComponent },
@@ -41,10 +41,9 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         canLoad: [AuthGuard]
     },
-    {
-        path: 'configuracion', component: AppMainComponent
-    },
-    { path: 'boleta', component: BoletaPublicaComponent, canActivate: [SystemGuard] },
+    // { path: 'boleta', component: BoletaPublicaComponent, canActivate: [SystemGuard] },
+    // { path: 'test', component: BoletaTestComponent },
+    { path: 'emitir-voto', component: Boleta1Component, canActivate: [AuthGuard], canLoad: [AuthGuard] },
     { path: '**', redirectTo: 'login' }
 ]
 

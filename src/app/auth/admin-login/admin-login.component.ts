@@ -74,7 +74,7 @@ export class AdminLoginComponent implements OnInit {
     this.adminService.loginAdmin( this.adminLoginForm.value )
       .subscribe( resp => {
         console.log(resp);
-        this.router.navigateByUrl('/configuracion');
+        this.router.navigateByUrl('/administracion-sistema');
         
       }, (err) => {
         this.loading = false;
