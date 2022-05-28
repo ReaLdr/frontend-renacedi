@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
+import { Administrador } from './models/admin.model';
 import { Usuario } from './models/usuario.model';
+import { AdminService } from './service/admin.service';
 import { MenuService } from './service/app.menu.service';
 import { UsuarioService } from './service/usuario.service';
 
@@ -22,14 +24,17 @@ import { UsuarioService } from './service/usuario.service';
 export class AppMenuComponent implements OnInit {
 
     public usuario: Usuario;
+    public administrador: Administrador;
 
     model: any[];
 
     constructor(public appMain: AppMainComponent,
         private usuarioService: UsuarioService,
+        private adminService: AdminService,
         public menuService: MenuService
         ) {
-            this.usuario = usuarioService.usuario;
+            // this.usuario = usuarioService.usuario;
+            this.administrador = adminService.administrador;
             // console.log(this.usuario);
             
         }
@@ -37,7 +42,7 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: `Inicio - ${this.usuario.nombre_usuario}`,
+                label: `Inicio - ${this.administrador.usuario}`,
                 // items:[  ]
             }
         ];

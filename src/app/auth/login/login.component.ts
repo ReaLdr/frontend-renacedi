@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   loading: boolean = false;
 
   loginForm: FormGroup = this.fb.group({
-    correo: ['dilemajire@gmail.com', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-    contrasena: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+    correo: ['dilemajire@gmail.com', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    contrasena: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]]
   });
 
   valCheck: string[] = ['remember'];

@@ -14,7 +14,8 @@ export class MreService {
               private usuarioService: UsuarioService) { }
 
   getMRE(){
-    const id_distrito = this.usuarioService.idDistrito;
+    const id_distrito = 1;
+    // const id_distrito = this.usuarioService.idDistrito;
     return this.http.get( `${base_url}/mre/${id_distrito}` );
   }
 }

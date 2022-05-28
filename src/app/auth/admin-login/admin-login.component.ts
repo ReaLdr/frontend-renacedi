@@ -42,8 +42,8 @@ export class AdminLoginComponent implements OnInit {
   loading: boolean = false;
 
   adminLoginForm: FormGroup = this.fb.group({
-    usuario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-    contrasena: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+    usuario: ['Admin1', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    contrasena: ['12345', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
   });
   
   config: AppConfig;
@@ -73,7 +73,7 @@ export class AdminLoginComponent implements OnInit {
 
     this.adminService.loginAdmin( this.adminLoginForm.value )
       .subscribe( resp => {
-        console.log(resp);
+        // console.log(resp);
         this.router.navigateByUrl('/administracion-sistema');
         
       }, (err) => {

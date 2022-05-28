@@ -25,10 +25,6 @@ export class UsuarioService {
     return this.usuario.perfil;
   }
 
-  get idDistrito(): number{
-    return this.usuario.id_distrito;
-  }
-
   get token(): string{
     return localStorage.getItem('token') || '';
   }
@@ -48,15 +44,17 @@ export class UsuarioService {
         tap( (resp: any) =>{
           // console.log(resp);
           
-          this.guardarLocalStorage( resp.token, resp.menu );
+          this.guardarLocalStorage( resp.token );
+          // this.guardarLocalStorage( resp.token, resp.menu );
         })
       )
     
   }
 
-  guardarLocalStorage( token: string, menu: any ){
+  guardarLocalStorage( token: string ){
+  // guardarLocalStorage( token: string, menu: any ){
     localStorage.setItem('token', token);
-    localStorage.setItem('menu', JSON.stringify(menu));
+    // localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   logOut(){
@@ -78,7 +76,7 @@ export class UsuarioService {
 
           this.usuario = new Usuario( id_usuario, id_distrito, nombre_usuario, usuario, estado, perfil, '' );
 
-          this.guardarLocalStorage( resp.token, resp.menu );
+          this.guardarLocalStorage( resp.token );
 
           return true;
         }),

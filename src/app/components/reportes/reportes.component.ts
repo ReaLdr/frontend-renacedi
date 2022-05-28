@@ -27,7 +27,7 @@ export class ReportesComponent implements OnInit {
   ngOnInit(): void {
     this.cargaDistritos();
     this.perfil = this.usuarioService.perfil;
-    this.id_distrito = this.usuarioService.idDistrito;
+    // this.id_distrito = this.usuarioService.idDistrito;
   }
 
   rptCapturaActas(){

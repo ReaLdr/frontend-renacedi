@@ -18,11 +18,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgChartsModule } from 'ng2-charts';
 import { ReportesComponent } from './reportes/reportes.component';
-import { CapturaActasComponent } from './captura-actas/captura-actas.component';
 import { GraficasComponent } from './graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritales/listado-boletas-distritales.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { Boleta1Component } from './boleta1/boleta1.component';
+import { CargaCatalogosComponent } from './carga-catalogos/carga-catalogos.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +36,11 @@ import { Boleta1Component } from './boleta1/boleta1.component';
     LoginComponent,
     HeaderComponent,
     ReportesComponent,
-    CapturaActasComponent,
     GraficasComponent,
     ListadoBoletasDistritalesComponent,
     ConfiguracionComponent,
     Boleta1Component,
+    CargaCatalogosComponent,
   ],
   imports: [
     CommonModule,

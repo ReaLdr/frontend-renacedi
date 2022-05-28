@@ -108,25 +108,27 @@ export class EstadisticaService {
       )
   }
   
-  obtenerDatosCardsActas(){
-    const url = `${base_url}/estadisticas/datos-cards-actas`;
+  obtenerDatosCardsVotos(){
+    const url = `${base_url}/estadisticas/datos-cards-votos`;
     return this.http.get(url, this.headers)
       .pipe(
-        map(( resp: RespuestaDataCardsActas ) => {
-          // console.log(resp);
+        map(( resp: any ) => {
+          console.log(resp);
           
-          return resp.data_cards_actas;
+          return resp.countVotos;
         })
       )
   }
   
   
   obtenerDatosCardsBoletas(){
-    const url = `${base_url}/estadisticas/datos-cards-boletas`;
+    const url = `${base_url}/estadisticas/datos-cards-avance`;
     return this.http.get(url, this.headers)
       .pipe(
-        map(( resp: RespuestaDataCardsBoletas ) => {
-          return resp.data_cards_boletas;
+        map(( resp: any ) => {
+          console.log(resp);
+          
+          return resp.porcentaje_avance;
         })
       )
   }

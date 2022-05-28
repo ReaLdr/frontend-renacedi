@@ -1,0 +1,113 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="layout-main-boleta flex align-items-center justify-content-center">
+            <div class="contenedor">
+                <form [formGroup]="catVotantesForm" (submit)="guardarUsuarios()">
+
+                    <p-fieldset legend="Cargar catálogo de votantes">
+                        <div class="w-full md:w-10 mx-auto">
+
+                            <div class="grid">
+                                <div class="col-12">
+
+                                    <div class="text-center">
+                                        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, sit!</h5>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- AQUI -->
+
+                                <div styleClass="w-full" class="md:w-10 mx-auto">
+                                    <div class="field grid">
+                                        <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">Adjuntar archivo:
+                                        </label>
+                                        <div class="col-12 md:col-8">
+                                            <p-fileUpload name="files" [multiple]="false" accept=".csv"
+                                                maxFileSize="10000000" fileLimit="1"
+                                                invalidFileLimitMessageSummary="Número máximo de archivos excedido"
+                                                invalidFileLimitMessageDetail="El límite es 2 como máximo."
+                                                invalidFileTypeMessageDetail="tipos de archivos permitidos: csv"
+                                                invalidFileTypeMessageSummary="Tipo de archivo no admitido"
+                                                [showUploadButton]="false" chooseLabel="Seleccionar"
+                                                cancelLabel="Cancelar y limpiar"
+                                                (onSelect)="dealWithFileVotantes($event)">
+                                                <ng-template pTemplate="content">
+                                                    <ul *ngIf="uploadedFiles.length">
+                                                        <li *ngFor="let file of uploadedFiles">{{file.name}} -
+                                                            {{file.size}} bytes</li>
+                                                    </ul>
+                                                </ng-template>
+                                            </p-fileUpload>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <button type="submit" [disabled]="!catVotantesForm.valid" #enviado pButton pRipple
+                                label="Guardar catálogo de botantes" class="w-full p-3 text-xl"
+                                iconPos="right" [loading]="loading"></button>
+                        </div>
+                    </p-fieldset>
+                </form>
+                
+                <form class="p-2" [formGroup]="catCandidatosForm" (submit)="guardarCandidatos()">
+
+                    <p-fieldset legend="Cargar catálogo de candidatos">
+                        <div class="w-full md:w-10 mx-auto">
+
+                            <div class="grid">
+                                <div class="col-12">
+
+                                    <div class="text-center">
+                                        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, sit!</h5>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- AQUI -->
+
+                                <div styleClass="w-full" class="md:w-10 mx-auto">
+                                    <div class="field grid">
+                                        <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">Adjuntar archivo:
+                                        </label>
+                                        <div class="col-12 md:col-8">
+                                            <p-fileUpload name="files" [multiple]="false" accept=".csv"
+                                                maxFileSize="10000000" fileLimit="1"
+                                                invalidFileLimitMessageSummary="Número máximo de archivos excedido"
+                                                invalidFileLimitMessageDetail="El límite es 2 como máximo."
+                                                invalidFileTypeMessageDetail="tipos de archivos permitidos: csv"
+                                                invalidFileTypeMessageSummary="Tipo de archivo no admitido"
+                                                [showUploadButton]="false" chooseLabel="Seleccionar"
+                                                cancelLabel="Cancelar y limpiar"
+                                                (onSelect)="dealWithFileVotantes($event)">
+                                                <ng-template pTemplate="content">
+                                                    <ul *ngIf="uploadedFiles.length">
+                                                        <li *ngFor="let file of uploadedFiles">{{file.name}} -
+                                                            {{file.size}} bytes</li>
+                                                    </ul>
+                                                </ng-template>
+                                            </p-fileUpload>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <button type="submit" [disabled]="!catVotantesForm.valid" #enviado pButton pRipple
+                                label="Guardar catálogo de candidatos" class="w-full p-3 text-xl"
+                                iconPos="right" [loading]="loading"></button>
+                        </div>
+                    </p-fieldset>
+                </form>
+                <!-- <pre> {{boletaDistritalForm.value | json}} </pre> -->
+
+            </div>
+        </div>
+    </div>
+</div>
