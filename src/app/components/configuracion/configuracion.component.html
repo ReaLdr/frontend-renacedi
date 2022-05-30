@@ -1,1 +1,55 @@
-<p>configuracion works!</p>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Configuración del sistema <i class="pi pi-info-circle" pTooltip="Se configuran los horarios de operación"></i></h5>
+            <form [formGroup]="configuracionForm" (submit)="guardarConfiguracion();">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="firstname2">Fecha y hora de inicio</label>
+                        <!-- <input pInputText id="firstname2" type="text" /> -->
+                        <p-calendar formControlName="fecha_inicio" [showSeconds]="false" [showTime]="true" [showIcon]="true" inputId="time"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label htmlFor="lastname2">Fecha y hora de término</label>
+                        <!-- <input pInputText id="lastname2" type="text" /> -->
+                        <p-calendar formControlName="fecha_termino" [showSeconds]="false" [showTime]="true" [showIcon]="true" inputId="time"></p-calendar>
+                    </div>
+                </div>
+                <button type="submit" #enviado [disabled]="!configuracionForm.valid" pButton pRipple label="Guardar y/o enviar respuestas"
+                        class="w-full p-3 text-xl"
+                        iconPos="right" [loading]="loading"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            <h5>Resumen</h5>
+            <!-- <p-fieldset legend="Resultado"> -->
+    
+            <p-table [value]="historialConfiguraciones" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                responsiveLayout="scroll"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                [rowsPerPageOptions]="[10,25,50]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>#</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowConfiguracion>
+                    <tr [ngClass]="{'row-inactive': rowConfiguracion.estado === 0, 'row-active': rowConfiguracion.estado === 1}">
+                        <td>{{rowConfiguracion.id_configuracion}}</td>
+                        <td>{{rowConfiguracion.fecha_inicio | date: 'd/MM/yyyy, hh:mm' : 'es-MX'}}</td>
+                        <!-- <td>{{rowConfiguracion.fecha_inicio | date: 'M/d/yy, h:mm a' : 'es-MX'}}</td> -->
+                        <!-- <td>{{rowConfiguracion.fecha_inicio | date: 'short' : 'es-MX'}}</td> -->
+                        <td>{{rowConfiguracion.fecha_termino | date: 'd/MM/yyyy, hh:mm' : 'es-MX'}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <!-- </p-fieldset> -->
+            <!-- <h5>Resultado</h5> -->
+        </div> <!-- .card -->
+    </div>
+</div>

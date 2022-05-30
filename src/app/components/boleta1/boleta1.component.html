@@ -17,15 +17,15 @@
 
         <p-toolbar class="p-1">
             <div class="p-toolbar-group-left">
-                <span>
+                <span class="animate__animated animate__bounceInLeft">
                     <!-- TODO: Temporizador -->
-                    <p-tag icon="pi pi-clock" severity="danger" value="Tiempo restante para emitir tu voto: 00:08:10">
+                    <p-tag icon="pi pi-clock" [severity]="severity_coundown" value="Tiempo restante para emitir tu voto: {{demo}}">
                     </p-tag>
                 </span>
             </div>
 
             <div class="p-toolbar-group-right">
-                <p-button label="Cerrar sesión" icon="pi pi-sign-out" (click)="cerrarSesion();"></p-button>
+                <p-button class="animate__animated animate__bounceInRight" label="Cerrar sesión" icon="pi pi-sign-out" (click)="cerrarSesion();"></p-button>
             </div>
         </p-toolbar>
 

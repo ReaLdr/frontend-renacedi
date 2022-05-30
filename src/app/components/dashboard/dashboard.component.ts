@@ -6,6 +6,8 @@ import { EstadisticaService } from 'src/app/service/estadistica.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { Customer } from 'src/app/api/customer';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import { SystemService } from 'src/app/service/system.service';
+import { Router } from '@angular/router';
 
 interface AvanceCapturaDistrital {
     distrito: string;
@@ -66,9 +68,11 @@ export class DashboardComponent implements OnInit {
 
     constructor(public configService: ConfigService,
                 private estadisticaService: EstadisticaService,
+                private systemService: SystemService,
                 private usuarioService: UsuarioService,
                 private confirmationService: ConfirmationService,
-                private messageService: MessageService) { }
+                private messageService: MessageService,
+                private router: Router) { }
 
     ngOnInit() {
 
@@ -138,7 +142,15 @@ export class DashboardComponent implements OnInit {
             icon: 'pi pi-info-circle',
             acceptLabel: 'Si, reiniciar',
             accept: () => {
-                this.messageService.add({severity:'info', summary:'Confirmado', detail:'La votación se ha reiniciado'});
+                this.systemService.reiniciarVotacion()
+                    .subscribe( (res: any) => {
+                        if(res.ok){
+                            this.messageService.add({severity:'info', summary:'Confirmado', detail:'La votación se ha reiniciado. Deberás configurar  los periodos de votación'});
+                            setTimeout(() => {
+                                this.router.navigateByUrl('/administracion-sistema/configuracion-sistema');
+                            }, 3000);
+                        }
+                    })
             },
             reject: (type) => {
                 switch(type) {

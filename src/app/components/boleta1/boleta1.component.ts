@@ -132,6 +132,61 @@ export class Boleta1Component implements OnInit {
     { opcion: 9, posicion: null }
   ];
 
+  severity_coundown: string = 'success';
+
+  // countDownDate: any;
+  countDownDate = new Date("may 28, 2022 13:35:00").getTime();
+  demo: any;
+  now: Date;
+
+  x = setInterval(() =>{
+    // if(this.estado_sistema === 0){
+      let now = new Date().getTime();
+      let distance = this.countDownDate - now;
+      let days = Math.floor(distance/(1000*60*60*24));
+      let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+      let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+      let seconds = Math.floor( (distance % (1000*60)) / 1000 );
+
+      let txtHoras = '';
+      ( hours === 1 ? txtHoras = 'Hora' : txtHoras = 'Horas');
+      let txtDias = '';
+      ( days === 1 ? txtDias = 'Día' : txtDias = 'Días');
+      let txtMinutos = '';
+      ( minutes === 1 ? txtMinutos = 'Minuto' : txtMinutos = 'Minutos');
+
+      // console.log(distance);
+      this.demo = `${minutes} ${txtMinutos} con ${seconds} Segundos`;
+      // this.demo = `${days} ${txtDias} ${hours} ${txtHoras} ${minutes} ${txtMinutos} con ${seconds} Segundos`;
+      
+      if(minutes < 2){
+        this.severity_coundown = 'danger';
+      }
+
+      if(isNaN(days) || isNaN(hours) || isNaN(minutes) ){
+        this.demo = `Cargando...`;
+      }
+      // console.log(this.demo);
+
+      
+      
+      if( distance <= 0 ){
+        clearInterval(this.x);
+        this.demo = `Expired`;
+        this.usuarioService.logOut();
+        // this.estado_sistema = 1;
+        // localStorage.setItem('sys', '1');
+        
+        /* this.systemService.getEstadoSystem()
+          .subscribe( res => {
+            
+          }); */
+        
+      }
+    // }
+    
+  });
+
   constructor( private fb: FormBuilder,
                private messageService: MessageService,
                private router: Router,

@@ -69,7 +69,7 @@ export class UsuarioService {
       .pipe( 
         map( (resp: any) => {
 
-          // console.log(resp);
+          console.log(resp);
 
           const { id_usuario, id_distrito, nombre_usuario, perfil, estado, usuario } = resp.usuarioDB;
           // const token = resp.token;

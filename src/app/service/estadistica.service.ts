@@ -113,7 +113,7 @@ export class EstadisticaService {
     return this.http.get(url, this.headers)
       .pipe(
         map(( resp: any ) => {
-          console.log(resp);
+          // console.log(resp);
           
           return resp.countVotos;
         })
@@ -126,7 +126,7 @@ export class EstadisticaService {
     return this.http.get(url, this.headers)
       .pipe(
         map(( resp: any ) => {
-          console.log(resp);
+          // console.log(resp);
           
           return resp.porcentaje_avance;
         })
