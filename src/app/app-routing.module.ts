@@ -17,6 +17,7 @@ import { Boleta1Component } from './components/boleta1/boleta1.component';
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { CargaCatalogosComponent } from './components/carga-catalogos/carga-catalogos.component';
+import { EnviaCorreosComponent } from './components/envia-correos/envia-correos.component';
 
 const routes: Routes = [
     {
@@ -35,6 +36,7 @@ const routes: Routes = [
             { path: '', component: DashboardComponent },
             { path: 'cargar-catalogos', component: CargaCatalogosComponent },
             { path: 'configuracion-sistema', component: ConfiguracionComponent },
+            { path: 'enviar-correos', component: EnviaCorreosComponent },
             // { path: 'graficas', component: GraficasComponent },
             // { path: 'boleta', component: BoletaComponent, canActivate: [AdminGuard] },
             // { path: 'captura-actas', component: CapturaActasComponent, canActivate: [AdminGuard] },

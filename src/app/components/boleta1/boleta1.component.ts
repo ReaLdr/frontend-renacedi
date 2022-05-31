@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { OpcionesBoleta } from 'src/app/interfaces/opciones-boleta.interface';
 import { BoletaService } from 'src/app/service/boleta.service';
+import { SystemService } from 'src/app/service/system.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2';
       /* width: 90%; */
       /* background-color: var(--surface-card); */
     }
-    
+
     :host ::ng-deep .layout-main-boleta .contenedor  {
       width: 90%;
       border-radius: 56px;
@@ -26,7 +27,7 @@ import Swal from 'sweetalert2';
       /* background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%); */
     }
 
-    
+
     :host ::ng-deep .custom-toast .p-toast-top-right {
       top: 125px;
     }
@@ -58,15 +59,17 @@ export class Boleta1Component implements OnInit {
 
   loading: boolean = false;
 
-  items: MenuItem[];
-
-
-
   arrOpcionesSeleccionadas: number[] = [];
 
   boletaForm: FormGroup = this.fb.group({
     seleccion: new FormArray([], [Validators.required, Validators.minLength(5), Validators.maxLength(5)])
   });
+
+  periodo_operacion:  Date = null;
+  fecha_inicio:  Date = null;
+  fecha_termino:  any;
+  fecha_actual: any;
+  estado_sistema: number = 0;
 
   opcionesBoleta: OpcionesBoleta[] = [
     {
@@ -135,30 +138,33 @@ export class Boleta1Component implements OnInit {
   severity_coundown: string = 'success';
 
   // countDownDate: any;
-  countDownDate = new Date("may 28, 2022 13:35:00").getTime();
+  // countDownDate = new Date("may 30, 2022 15:30:00").getTime();
   demo: any;
-  now: Date;
+  // this.fecha_actual: Date;
 
   x = setInterval(() =>{
     // if(this.estado_sistema === 0){
-      let now = new Date().getTime();
-      let distance = this.countDownDate - now;
+      let now = new Date(this.fecha_actual).getTime();
+      // console.log(now);
+      
+      // let now = new Date().getTime();
+      let distance = this.fecha_termino - now;
       let days = Math.floor(distance/(1000*60*60*24));
       let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
       let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
       let seconds = Math.floor( (distance % (1000*60)) / 1000 );
 
       let txtHoras = '';
-      ( hours === 1 ? txtHoras = 'Hora' : txtHoras = 'Horas');
+      ( hours === 1 ? txtHoras = ' Hora' : txtHoras = ' Horas');
       let txtDias = '';
-      ( days === 1 ? txtDias = 'Día' : txtDias = 'Días');
+      ( days === 1 ? txtDias = ' Día' : txtDias = ' Días');
       let txtMinutos = '';
-      ( minutes === 1 ? txtMinutos = 'Minuto' : txtMinutos = 'Minutos');
+      ( minutes === 1 ? txtMinutos = ' Minuto' : txtMinutos = ' Minutos');
 
       // console.log(distance);
-      this.demo = `${minutes} ${txtMinutos} con ${seconds} Segundos`;
-      // this.demo = `${days} ${txtDias} ${hours} ${txtHoras} ${minutes} ${txtMinutos} con ${seconds} Segundos`;
-      
+      // this.demo = `${minutes} ${txtMinutos} con ${seconds} Segundos`;
+      this.demo = `${ (days === 0 ? '' : days + txtDias) } ${ (hours === 0 ? '' : hours + txtHoras) } ${minutes} ${txtMinutos} con ${seconds} Segundos`;
+
       if(minutes < 2){
         this.severity_coundown = 'danger';
       }
@@ -168,54 +174,60 @@ export class Boleta1Component implements OnInit {
       }
       // console.log(this.demo);
 
-      
-      
+// console.log(distance);
+
+
       if( distance <= 0 ){
         clearInterval(this.x);
         this.demo = `Expired`;
         this.usuarioService.logOut();
-        // this.estado_sistema = 1;
+        // this.estado_sistema = 0;
         // localStorage.setItem('sys', '1');
-        
+
         /* this.systemService.getEstadoSystem()
           .subscribe( res => {
-            
+
           }); */
-        
+
       }
     // }
-    
+
   });
 
   constructor( private fb: FormBuilder,
                private messageService: MessageService,
                private router: Router,
                private boletaService: BoletaService,
-               private usuarioService: UsuarioService) { }
+               private usuarioService: UsuarioService,
+               private systemService: SystemService) { }
 
   ngOnInit(): void {
+    this.obtenerFechasOperacion();
+  }
 
-    this.items = [
-      {
-          label: 'Update',
-          icon: 'pi pi-refresh'
-      },
-      {
-          label: 'Delete',
-          icon: 'pi pi-times'
-      },
-      {
-          label: 'Angular',
-          icon: 'pi pi-external-link',
-          url: 'http://angular.io'
-      },
-      {
-          label: 'Router',
-          icon: 'pi pi-upload',
-          routerLink: '/fileupload'
-      }
-  ];
+  obtenerFechasOperacion(){
+    this.systemService.cargarConfiguracionActiva()
+      .subscribe( (res: any) => {
 
+        if(res.ok){
+          const { id_configuracion,
+            fecha_inicio,
+            fecha_termino,
+            estado } = res.configuracionActivaDB;
+            this.estado_sistema = estado;
+            this.fecha_inicio = fecha_inicio;
+            this.fecha_termino = new Date(fecha_termino).getTime();
+            this.fecha_actual = res.fecha_hora_server;
+            console.log({fecha : res.fecha_hora_server});
+            
+            console.log(this.fecha_termino);
+
+            // new Date("may 30, 2022 15:30:00").getTime()
+            console.log(res.configuracionActivaDB);
+
+        }
+
+      })
   }
 
   selectOpcion(event) {

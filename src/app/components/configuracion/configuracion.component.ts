@@ -44,7 +44,7 @@ export class ConfiguracionComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.cargarHistorial();
+    this.mostrarHistorial();
   }
 
   guardarConfiguracion() {
@@ -61,7 +61,10 @@ export class ConfiguracionComponent implements OnInit {
               if (result.isConfirmed) {
 
                 // this.router.navigateByUrl('/');
-                location.reload();
+                // location.reload();
+                this.mostrarHistorial();
+                this.configuracionForm.reset();
+                this.loading = false;
 
               }
             });
@@ -74,8 +77,8 @@ export class ConfiguracionComponent implements OnInit {
     }
   }
 
-  cargarHistorial() {
-    this.systemService.cargarConfiguraciones()
+  mostrarHistorial() {
+    this.systemService.obtenerConfiguraciones()
       .subscribe((res: HistorialConfiguraciones[]) => {
 
         // this.historialConfiguraciones.push(res);

@@ -23,6 +23,7 @@ import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritale
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { Boleta1Component } from './boleta1/boleta1.component';
 import { CargaCatalogosComponent } from './carga-catalogos/carga-catalogos.component';
+import { EnviaCorreosComponent } from './envia-correos/envia-correos.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CargaCatalogosComponent } from './carga-catalogos/carga-catalogos.compo
     ConfiguracionComponent,
     Boleta1Component,
     CargaCatalogosComponent,
+    EnviaCorreosComponent,
   ],
   imports: [
     CommonModule,

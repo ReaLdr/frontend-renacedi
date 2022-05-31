@@ -94,7 +94,7 @@ export class SystemService {
     return this.http.post( url, data, this.headers );
   }
 
-  cargarConfiguraciones(){
+  obtenerConfiguraciones(){
     const url = `${base_url}/system/listado-configuraciones`;
     return this.http.get(url, this.headers)
       .pipe(
@@ -108,6 +108,55 @@ export class SystemService {
           return configuracionSistemaDB;
         })
       )
+  }
+
+  cargarConfiguracionActiva(){
+    const url = `${base_url}/system/configuracion-activa`;
+    return this.http.get(url, this.headers)
+      /* .pipe(
+        map(( resp: any ) => {
+          // console.log(resp.configuracionSistemaDB);
+          // const  { id_etapa, estado } = resp.configuracionActivaDB;
+          // const  { fecha_actual, fecha_apertura } = resp.fechas;
+          // this.stateSystem = estado;
+          const { configuracionActivaDB } = resp;
+          return configuracionActivaDB[0];
+        })
+      ) */
+  }
+
+  subirCatalogoCandidatos(data){
+
+    const { archivoCandidatos } = data;
+    
+
+    const formData = new FormData();
+
+    formData.append('file', archivoCandidatos);
+
+    const url = `${base_url}/system/subir-catalogo-candidatos`;
+    return this.http.post( url, formData, this.headers )
+
+  }
+
+  subirCatalogoVotantes(data){
+
+    const { archivoVotantes } = data;
+    
+
+    const formData = new FormData();
+
+    formData.append('file', archivoVotantes);
+
+    const url = `${base_url}/system/subir-catalogo-votantes`;
+    return this.http.post( url, formData, this.headers )
+      /* .pipe(
+        map( (resp: any) => {
+          const { candidatos_cargados, msg } = resp;
+          return { candidatos_cargados, msg };
+        })
+      ) */
+
   }
 
 }

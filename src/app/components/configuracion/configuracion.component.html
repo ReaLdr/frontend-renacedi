@@ -39,7 +39,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rowConfiguracion>
-                    <tr [ngClass]="{'row-inactive': rowConfiguracion.estado === 0, 'row-active': rowConfiguracion.estado === 1}">
+                    <tr [ngClass]="{'row-inactive': rowConfiguracion.estado === 0, 'row-active': rowConfiguracion.estado === 1, 'animate__animated animate__flash': rowConfiguracion.estado === 1}">
                         <td>{{rowConfiguracion.id_configuracion}}</td>
                         <td>{{rowConfiguracion.fecha_inicio | date: 'd/MM/yyyy, hh:mm' : 'es-MX'}}</td>
                         <!-- <td>{{rowConfiguracion.fecha_inicio | date: 'M/d/yy, h:mm a' : 'es-MX'}}</td> -->

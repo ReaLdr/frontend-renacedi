@@ -1,0 +1,11 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Click para enviar a los usuarios cargados <i class="pi pi-info-circle" pTooltip="Se hará un evío masivo de correos"></i></h5>
+            <button type="button" pButton pRipple label="Enviar correos"
+                    class="w-full p-3 text-xl"
+                    iconPos="right" [loading]="loading" (click)="enviarCorreos();" icon="pi pi-send"></button>
+        </div>
+    </div>
+
+</div>
