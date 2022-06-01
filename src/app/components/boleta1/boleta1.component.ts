@@ -9,6 +9,11 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
+interface PosicionSeleccion{
+  opcion: number;
+  posicion: null | number;
+}
+
 @Component({
   selector: 'app-boleta1',
   templateUrl: './boleta1.component.html',
@@ -65,64 +70,16 @@ export class Boleta1Component implements OnInit {
     seleccion: new FormArray([], [Validators.required, Validators.minLength(5), Validators.maxLength(5)])
   });
 
-  periodo_operacion:  Date = null;
-  fecha_inicio:  Date = null;
-  fecha_termino:  any;
+  periodo_operacion: Date = null;
+  fecha_inicio: Date = null;
+  fecha_termino: any;
   fecha_actual: any;
   estado_sistema: number = 0;
 
-  opcionesBoleta: OpcionesBoleta[] = [
-    {
-      id_opcion: 1,
-      nombre_candidatx: 'Leonardo Daniel Rea Martínez Pérez López',
-      ople_completo: 'Instituto Electoral Ciudad de México',
-      ople_siglas: 'IECM',
-      estado: 1,
-      nombre_img: 'avatar1.png'
-    },
-    {
-      id_opcion: 2,
-      nombre_candidatx: 'Daniela Del Carmen Rea Martínez',
-      ople_completo: 'Instituto Nacional Electoral',
-      ople_siglas: 'INE',
-      estado: 1,
-      nombre_img: 'avatar2.png'
-    },
-    {
-      id_opcion: 3,
-      nombre_candidatx: 'Viridiana Carranza Pérez',
-      ople_completo: 'Instituto Electoral Ciudad de México',
-      ople_siglas: 'IECM',
-      estado: 1,
-      nombre_img: 'avatar2.png'
-    },
-    {
-      id_opcion: 4,
-      nombre_candidatx: 'Daniela Del Carmen Rea Martínez',
-      ople_completo: 'Instituto Nacional Electoral',
-      ople_siglas: 'INE',
-      estado: 1,
-      nombre_img: 'avatar2.png'
-    },
-    {
-      id_opcion: 5,
-      nombre_candidatx: 'Héctor Miguel Rea Salazar',
-      ople_completo: 'Instituto Nacional Electoral',
-      ople_siglas: 'INE',
-      estado: 1,
-      nombre_img: 'avatar1.png'
-    },
-    {
-      id_opcion: 6,
-      nombre_candidatx: 'Jonathan Pérez Prado',
-      ople_completo: 'Instituto Nacional Electoral',
-      ople_siglas: 'INE',
-      estado: 1,
-      nombre_img: 'avatar1.png'
-    },
-  ];
+  opcionesBoleta: OpcionesBoleta[] = [];
 
-  posicionSeleccion = [
+  posicionSeleccion: PosicionSeleccion[] = [{ opcion: 0, posicion: null }];
+  /* posicionSeleccion = [
     { opcion: 0, posicion: null },
     { opcion: 1, posicion: null },
     { opcion: 2, posicion: null },
@@ -133,7 +90,7 @@ export class Boleta1Component implements OnInit {
     { opcion: 7, posicion: null },
     { opcion: 8, posicion: null },
     { opcion: 9, posicion: null }
-  ];
+  ]; */
 
   severity_coundown: string = 'success';
 
@@ -142,88 +99,85 @@ export class Boleta1Component implements OnInit {
   demo: any;
   // this.fecha_actual: Date;
 
-  x = setInterval(() =>{
-    // if(this.estado_sistema === 0){
-      let now = new Date(this.fecha_actual).getTime();
-      // console.log(now);
-      
-      // let now = new Date().getTime();
-      let distance = this.fecha_termino - now;
-      let days = Math.floor(distance/(1000*60*60*24));
-      let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-      let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-      let seconds = Math.floor( (distance % (1000*60)) / 1000 );
+  // Interval
 
-      let txtHoras = '';
-      ( hours === 1 ? txtHoras = ' Hora' : txtHoras = ' Horas');
-      let txtDias = '';
-      ( days === 1 ? txtDias = ' Día' : txtDias = ' Días');
-      let txtMinutos = '';
-      ( minutes === 1 ? txtMinutos = ' Minuto' : txtMinutos = ' Minutos');
+  countDownDate: any;
+  // countDownDate = new Date("may 31, 2022 17:30:00").getTime();//->fecha_termino
+  x = setInterval(() => {
+    // if (this.estado_sistema === 0) {
+    // let now = new Date(this.fecha_actual).getTime();
+    // console.log(now);
 
-      // console.log(distance);
-      // this.demo = `${minutes} ${txtMinutos} con ${seconds} Segundos`;
-      this.demo = `${ (days === 0 ? '' : days + txtDias) } ${ (hours === 0 ? '' : hours + txtHoras) } ${minutes} ${txtMinutos} con ${seconds} Segundos`;
+    let now = new Date().getTime();
+    let distance = this.countDownDate - now;
 
-      if(minutes < 2){
-        this.severity_coundown = 'danger';
-      }
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      if(isNaN(days) || isNaN(hours) || isNaN(minutes) ){
-        this.demo = `Cargando...`;
-      }
-      // console.log(this.demo);
+    let txtHoras = '';
+    (hours === 1 ? txtHoras = ' Hora' : txtHoras = ' Horas');
+    let txtDias = '';
+    (days === 1 ? txtDias = ' Día' : txtDias = ' Días');
+    let txtMinutos = '';
+    (minutes === 1 ? txtMinutos = ' Minuto' : txtMinutos = ' Minutos');
 
-// console.log(distance);
+    // console.log(distance);
+    // this.demo = `${days} ${txtDias} ${hours} ${txtHoras} ${minutes} ${txtMinutos} con ${seconds} Segundos`;
+    this.demo = `${(days === 0 ? '' : days + txtDias)} ${(hours === 0 ? '' : hours + txtHoras)} ${minutes} ${txtMinutos} con ${seconds} Segundos`;
+    if (isNaN(days) || isNaN(hours) || isNaN(minutes)) {
+      this.demo = `Cargando...`;
+    }
+    // console.log(this.demo);
 
+    if (distance <= 0) {
 
-      if( distance <= 0 ){
-        clearInterval(this.x);
-        this.demo = `Expired`;
-        this.usuarioService.logOut();
-        // this.estado_sistema = 0;
-        // localStorage.setItem('sys', '1');
+      clearInterval(this.x);
+      this.demo = `Expired`;
+      this.usuarioService.logOut();
 
-        /* this.systemService.getEstadoSystem()
-          .subscribe( res => {
-
-          }); */
-
-      }
+    }
     // }
 
   });
 
-  constructor( private fb: FormBuilder,
-               private messageService: MessageService,
-               private router: Router,
-               private boletaService: BoletaService,
-               private usuarioService: UsuarioService,
-               private systemService: SystemService) { }
+  constructor(private fb: FormBuilder,
+    private messageService: MessageService,
+    private router: Router,
+    private boletaService: BoletaService,
+    private usuarioService: UsuarioService,
+    private systemService: SystemService) { }
 
   ngOnInit(): void {
+    this.obtenerEstado();
     this.obtenerFechasOperacion();
+    this.listarOpcionesBoleta();
   }
 
-  obtenerFechasOperacion(){
+  obtenerFechasOperacion() {
     this.systemService.cargarConfiguracionActiva()
-      .subscribe( (res: any) => {
+      .subscribe((res: any) => {
 
-        if(res.ok){
+        if (res.ok) {
           const { id_configuracion,
             fecha_inicio,
             fecha_termino,
             estado } = res.configuracionActivaDB;
-            this.estado_sistema = estado;
-            this.fecha_inicio = fecha_inicio;
-            this.fecha_termino = new Date(fecha_termino).getTime();
-            this.fecha_actual = res.fecha_hora_server;
-            console.log({fecha : res.fecha_hora_server});
-            
-            console.log(this.fecha_termino);
+          this.estado_sistema = estado;
+          this.fecha_inicio = fecha_inicio;
+          this.fecha_termino = new Date(fecha_termino).getTime();
+          this.fecha_actual = res.fecha_hora_server;
+          // console.log({ fecha: res.fecha_hora_server });
+          this.countDownDate = new Date(fecha_termino).getTime();
 
-            // new Date("may 30, 2022 15:30:00").getTime()
-            console.log(res.configuracionActivaDB);
+          //console.log(this.countDownDate);
+
+
+          //console.log(this.fecha_termino);
+
+          // new Date("may 30, 2022 15:30:00").getTime()
+          // console.log(res.configuracionActivaDB);
 
         }
 
@@ -238,7 +192,7 @@ export class Boleta1Component implements OnInit {
     if (event.target.checked) {
 
       if ((formArray.value.length) + 1 > 5) {
-        Swal.fire('¡Hey!', 'Solo puedes elegir hasta 3 opciones', 'info');
+        Swal.fire('¡Hey!', 'Solo puedes elegir hasta 5 opciones', 'info');
         event.target.checked = false;
         return false;
       }
@@ -310,36 +264,12 @@ export class Boleta1Component implements OnInit {
       return;
     }
 
-    /* if(errors > 0){
-      Swal.fire({
-        title: '¡Ups!',
-        icon: 'warning',
-        html: `Selecciona los campos requeridos`
-      });
-      return;
-    } */
-
     if (this.boletaForm.valid) {
-
-      // Desestructuramos
-      // const { seleccion } = this.boletaForm.value;
-      // const { alcaldiaSel: { id_demarcacion }, seleccion, tengoSel: { value: edad }, soySel: { value: genero }, otro } = this.boletaForm.value;
-
-      // creamos el data conforme lo recibimos en el backend
-      /* const data: BoletaPublica = {
-        id_demarcacion,
-        seleccion,
-        genero,
-        edad,
-        otro
-      }; */
-
-      // console.log(data);
 
       const data = this.boletaForm.value;
 
       this.boletaService.guardarBoleta(data)
-        .subscribe( resp => {
+        .subscribe(resp => {
 
           // console.log(resp);
           Swal.fire({
@@ -365,6 +295,43 @@ export class Boleta1Component implements OnInit {
 
   }
 
+  obtenerEstado() {
+    const estado = this.usuarioService.estado;
+
+    if (estado === 2) this.cerrarSesion();
+
+  }
+
+  listarOpcionesBoleta() {
+
+    this.boletaService.cargarOpcionesBoleta()
+      .subscribe(opcionesBoleta => {
+
+        // const showOpc = opcionesBoleta.sort( function(){ return Math.random() - 0.5 } );
+        // console.log({showOpc});
+
+        // this.opcionesBoleta = showOpc;
+        this.opcionesBoleta = opcionesBoleta;
+
+        this.opcionesBoleta.forEach( elemento => {
+          this.posicionSeleccion.push( { opcion: elemento.id_opcion, posicion: null } )
+          // console.log(this.posicionSeleccion);
+        })
+
+        
+        /* for (let iteracion = 0; iteracion < opcionesBoleta.length; iteracion++) {
+          // const element = array[iteracion];
+          this.posicionSeleccion.push( { opcion: opcionesBoleta[iteracion] } );
+          
+          
+        } */
+        // opcionesBoleta.length
+        
+
+      })
+
+  }
+
   showSticky(opciones: number) {
 
     this.messageService.clear();
@@ -385,7 +352,7 @@ export class Boleta1Component implements OnInit {
 
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this.usuarioService.logOut();
   }
 

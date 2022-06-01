@@ -145,6 +145,8 @@ export class DashboardComponent implements OnInit {
                 this.systemService.reiniciarVotacion()
                     .subscribe( (res: any) => {
                         if(res.ok){
+                            this.dataCardsVotos();
+                            this.dataCardsAvance();
                             this.messageService.add({severity:'info', summary:'Confirmado', detail:'La votación se ha reiniciado. Deberás configurar  los periodos de votación'});
                             setTimeout(() => {
                                 this.router.navigateByUrl('/administracion-sistema/configuracion-sistema');

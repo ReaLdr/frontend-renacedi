@@ -6,5 +6,5 @@ export const environment = {
   textoFieldest: 'Boleta de participación',
   texto1: 'Con la finalidad de elegir a las Consejeras y los Consejeros Electorales',
   texto2: 'Elige cinco opciones',
-  version: ' | UTSI • v0.0.1'
+  version: ' | UTSI • v1.0.0'
 };

@@ -1,6 +1,6 @@
 {
     "name": "consulta-infantil",
-    "version": "2.5.2",
+    "version": "1.0.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

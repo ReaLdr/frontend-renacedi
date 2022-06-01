@@ -59,10 +59,10 @@
                                 </div>
     
                             </form>
-                            <pre>
+                            <!-- <pre>
                                 {{ catVotantesForm.value | json }}
                                 {{ catVotantesForm.valid | json }}
-                            </pre>
+                            </pre> -->
                         </p-tabPanel>
                         <p-tabPanel header="Cargar catálogo de candidatos" rightIcon="pi pi-users" tooltip="Candidatos">
                             <form [formGroup]="catCandidatosForm" (submit)="guardarCandidatos()">
@@ -118,9 +118,9 @@
                                 </div>
     
                             </form>
-                            <pre>
+                            <!-- <pre>
                                 {{ catCandidatosForm.value | json }}
-                            </pre>
+                            </pre> -->
                         </p-tabPanel>
                     </p-tabView>
     

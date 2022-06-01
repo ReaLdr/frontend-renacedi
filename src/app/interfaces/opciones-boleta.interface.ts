@@ -1,11 +1,7 @@
 export interface OpcionesBoleta{
-    /* descripcion: string;
-    id_opcion: number | string;
-    nombre_img: string; */
-    id_opcion: number | string;
+    id_opcion: number;
     nombre_candidatx: string;
-    ople_siglas: string;
-    ople_completo: string;
+    entidad: string; 
     estado: number;
     nombre_img: string;
     fecha_alta_opcion?: string;

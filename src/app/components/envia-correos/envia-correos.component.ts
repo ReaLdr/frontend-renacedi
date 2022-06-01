@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CorreoService } from 'src/app/service/correo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-envia-correos',
@@ -11,20 +12,32 @@ export class EnviaCorreosComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor( private correoService: CorreoService ) { }
+  constructor(private correoService: CorreoService) { }
 
   ngOnInit(): void {
   }
 
-  enviarCorreos(){
+  enviarCorreos() {
     this.loading = true;
-    
+
     this.correoService.ejecutarEnvioCorreos()
-      .subscribe( res => {
-        console.log(res);
-        
+      .subscribe((resp: any) => {
+
+        if (resp.ok) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Listo',
+            html: resp.msg,
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.loading = false;
+            }
+          });
+        }
+
       })
-    
+
   }
 
 }

@@ -18,6 +18,7 @@ import { AuthAdminGuard } from './guards/auth-admin.guard';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { CargaCatalogosComponent } from './components/carga-catalogos/carga-catalogos.component';
 import { EnviaCorreosComponent } from './components/envia-correos/envia-correos.component';
+import { ActivarCuentaComponent } from './components/activar-cuenta/activar-cuenta.component';
 
 const routes: Routes = [
     {
@@ -28,6 +29,14 @@ const routes: Routes = [
     {
         path: 'login-admin',
         component: AdminLoginComponent
+    },
+    {
+        path: 'activar-cuenta',
+        component: ActivarCuentaComponent
+    },
+    {
+        path: 'activar-cuenta/:correo',
+        component: ActivarCuentaComponent
     },
     {
         path: 'administracion-sistema',

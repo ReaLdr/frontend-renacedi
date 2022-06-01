@@ -1,5 +1,9 @@
 # IECM - RENACEDI | Frontend
 
+## Notas
+
+El 1 de junio del 2022 se termina con el desarrollo de ambos módulos, resta hacer pruebas
+
 ## Librerías
 
 * Primeng

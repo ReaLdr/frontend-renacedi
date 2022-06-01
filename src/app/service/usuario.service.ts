@@ -24,6 +24,13 @@ export class UsuarioService {
     // return 1;
     return this.usuario.perfil;
   }
+  
+  get estado(): number {
+    // console.log(this.usuario);
+    
+    // return 1;
+    return this.usuario.estado;
+  }
 
   get token(): string{
     return localStorage.getItem('token') || '';
@@ -82,6 +89,10 @@ export class UsuarioService {
         }),
         catchError( error => of(false))
        );
+  }
+
+  guardarContrasena(data){
+    return this.http.put( `${base_url}/usuarios`, data, this.headers );
   }
 
 }

@@ -24,6 +24,7 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
 import { Boleta1Component } from './boleta1/boleta1.component';
 import { CargaCatalogosComponent } from './carga-catalogos/carga-catalogos.component';
 import { EnviaCorreosComponent } from './envia-correos/envia-correos.component';
+import { ActivarCuentaComponent } from './activar-cuenta/activar-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EnviaCorreosComponent } from './envia-correos/envia-correos.component';
     Boleta1Component,
     CargaCatalogosComponent,
     EnviaCorreosComponent,
+    ActivarCuentaComponent,
   ],
   imports: [
     CommonModule,

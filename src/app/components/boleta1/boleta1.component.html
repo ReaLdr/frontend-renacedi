@@ -47,7 +47,7 @@
 
                         </div>
 
-                        <!-- {{ posicionSeleccion | json }} -->
+                        {{ posicionSeleccion | json }}
 
                         <div class="col-12 md:col-4 animate__animated animate__fadeIn"
                             *ngFor="let choice of opcionesBoleta; let i=index">
@@ -74,7 +74,7 @@
                                                             {{choice.nombre_candidatx}}
                                                         </h6>
                                                         <p class="check-card-description text-base">
-                                                            {{choice.ople_siglas}} - {{choice.ople_siglas}}
+                                                            {{ choice.entidad }}
                                                         </p>
                                                     </div>
 
