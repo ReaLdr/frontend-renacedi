@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
   styles: [
     `
     :host ::ng-deep form p-password input {
-    width: 100% !important;
-    padding:1rem;
+      width: 100% !important;
+      padding:1rem;
     }
 
     :host ::ng-deep form .pi-eye{
@@ -43,6 +43,7 @@ export class ActivarCuentaComponent implements OnInit {
   });
 
   correo_param: string = '';
+  pass_valid: boolean = false;
 
   loading: boolean = false;
   version: string = environment.version;
@@ -68,7 +69,11 @@ export class ActivarCuentaComponent implements OnInit {
 
     this.loading = true;
 
-    this.usuarioService.guardarContrasena( this.activarCuentaForm.value )
+    if(this.activarCuentaForm.controls['contrasena'].value !== this.activarCuentaForm.controls['confirmar_contrasena'].value){
+      return Swal.fire('Ups', 'Las contraseñas no coinciden, favor de verificar', 'warning');
+    }
+
+    return this.usuarioService.guardarContrasena( this.activarCuentaForm.value )
       .subscribe( (resp: any) => {
         
         if(resp.ok){
@@ -95,6 +100,12 @@ export class ActivarCuentaComponent implements OnInit {
       }) 
     
 
+  }
+
+  validarContrasenas(){
+    const pass1 = this.activarCuentaForm.controls['contrasena'];
+    const pass2 = this.activarCuentaForm.controls['confirmar_contrasena'];
+    return this.pass_valid = pass2.touched && (pass1.value !== pass2.value);
   }
 
 }

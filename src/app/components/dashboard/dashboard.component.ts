@@ -8,6 +8,7 @@ import { Customer } from 'src/app/api/customer';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { SystemService } from 'src/app/service/system.service';
 import { Router } from '@angular/router';
+import { ResultadoVoto } from 'src/app/interfaces/resultado-voto';
 
 interface AvanceCapturaDistrital {
     distrito: string;
@@ -43,6 +44,8 @@ export class DashboardComponent implements OnInit {
             company: 'IECM'
         }
     ];
+
+    res_voto: ResultadoVoto[] = [];
 
     cargando: boolean = true;
 
@@ -86,18 +89,13 @@ export class DashboardComponent implements OnInit {
 
         this.dataCardsVotos();
         this.dataCardsAvance();
-        /* if(this.id_distrito === 0){
-            this.dataTablaAvanceCapturaDistrital();
-        } */
+        this.dataTablaResultadoVotacion();
 
     }
 
     public dataCardsVotos(){
         this.estadisticaService.obtenerDatosCardsVotos()
             .subscribe( (resp) => {
-
-                console.log(resp);
-                
                 
                 this.total_votos    = resp;
                 
@@ -114,21 +112,25 @@ export class DashboardComponent implements OnInit {
             })
     }
 
-    public dataTablaAvanceCapturaDistrital(){
-        this.estadisticaService.obtenerDatosTablaAvanceCaptura()
+    public dataTablaResultadoVotacion(){
+        this.estadisticaService.obtenerDatosTabla()
             .subscribe( (resp: any) => {
-                // console.log(this.data_tabla_avance_captura_distrital);
-                // console.log(resp.data_tabla_avance_captura);
-                let avance = 0;
+
+                console.log(resp);
+
+                this.res_voto = resp.data_tabla_avance_captura;
+
+                console.log(this.res_voto);
+                
+                
+
+                /* let avance = 0;
                 resp.data_tabla_avance_captura.forEach(element => {
                     avance = Number(((element.capturadas*100)/element.total).toFixed(2));
                     element.porcentaje_avance = avance;
                     // console.log(element);
                     this.data_tabla_avance_captura_distrital.push(element);
-                });
-                
-                // console.log(this.data_tabla_avance_captura_distrital);
-                
+                }); */
                 
             })
     }

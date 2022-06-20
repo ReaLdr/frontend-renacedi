@@ -133,8 +133,8 @@ export class EstadisticaService {
       )
   }
 
-  obtenerDatosTablaAvanceCaptura(){
-    const url = `${base_url}/estadisticas/datos-tabla-avance-captura`;
+  obtenerDatosTabla(){
+    const url = `${base_url}/estadisticas/datos-tabla-resultados`;
     return this.http.get(url, this.headers);
   }
 

@@ -36,6 +36,7 @@
                 
                         <label for="password" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
                         <p-password id="password" formControlName="contrasena" [maxlength]="30" [toggleMask]="false" [feedback]="false" styleClass="w-full mb-3"></p-password>
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" routerLink="/recuperar-contrasena" style="color: var(--primary-color)">Recuperar contraseña</a>
                         <button pButton pRipple [loading]="loading" iconPos="right" type="submit" [disabled]="!loginForm.valid" label="Ingresar" class="w-full p-3 text-xl"></button>
                     </form>
                 </div>

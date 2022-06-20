@@ -19,11 +19,16 @@ import { ConfiguracionComponent } from './components/configuracion/configuracion
 import { CargaCatalogosComponent } from './components/carga-catalogos/carga-catalogos.component';
 import { EnviaCorreosComponent } from './components/envia-correos/envia-correos.component';
 import { ActivarCuentaComponent } from './components/activar-cuenta/activar-cuenta.component';
+import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
 
 const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'recuperar-contrasena',
+        component: RecuperarContrasenaComponent
     },
     { path: 'emitir-voto', component: Boleta1Component, canActivate: [AuthGuard], canLoad: [AuthGuard] },
     {
