@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/service/usuario.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -38,14 +41,53 @@ export class RecuperarContrasenaComponent implements OnInit {
   nombre_sistema: string = environment.nombre_sistema;
   version = environment.version;
 
-  constructor( private fb: FormBuilder ) { }
+  constructor( private fb: FormBuilder,
+               private usuarioService: UsuarioService,
+               private router: Router ) { }
 
   ngOnInit(): void {
   }
 
   getPass(){
-    // TODO: Realizar petición para enviar correo y recuperar contraseña
-    alert('Submit!');
+
+    const correo = this.formForgotPass.controls['correo'].value;
+    this.loading = true;
+    
+
+    if(!correo){
+      Swal.fire('Ups', 'Debes ingresar un correo', 'warning');
+      this.loading = false;
+      return;
+    }
+    
+    this.usuarioService.recuperarContrasena( this.formForgotPass.value )
+      .subscribe( (res: any) => {
+
+        console.log(res);
+        
+
+        if(res.ok){
+
+          Swal.fire({
+            icon: 'success',
+            title: '¡Bien!',
+            html: `${res.msg}`,
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.loading = false;
+              this.router.navigateByUrl('/login');
+            }
+          });
+          
+        } else{
+          Swal.fire('Correo no enviado', 'El correo electrónico es incorrecto o la cuenta no ha sido activada', 'warning');
+        }
+
+        this.loading = false;
+        
+      });
+
   }
 
 }

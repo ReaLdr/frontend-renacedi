@@ -95,4 +95,8 @@ export class UsuarioService {
     return this.http.put( `${base_url}/usuarios`, data, this.headers );
   }
 
+  recuperarContrasena( data ){
+    return this.http.post(`${base_url}/correo/olvide-contrasena`, data);
+  }
+
 }
