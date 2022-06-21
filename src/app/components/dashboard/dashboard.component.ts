@@ -9,6 +9,7 @@ import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/a
 import { SystemService } from 'src/app/service/system.service';
 import { Router } from '@angular/router';
 import { ResultadoVoto } from 'src/app/interfaces/resultado-voto';
+import { ReportesService } from 'src/app/service/reportes.service';
 
 interface AvanceCapturaDistrital {
     distrito: string;
@@ -27,7 +28,7 @@ interface AvanceCapturaDistrital {
         }
         `
     ],
-    providers: [ConfirmationService,MessageService]
+    providers: [ConfirmationService, MessageService]
 })
 export class DashboardComponent implements OnInit {
 
@@ -67,15 +68,16 @@ export class DashboardComponent implements OnInit {
     // Tabla de avance en captura
     data_tabla_avance_captura_distrital: AvanceCapturaDistrital[] = [];
 
-    
+
 
     constructor(public configService: ConfigService,
-                private estadisticaService: EstadisticaService,
-                private systemService: SystemService,
-                private usuarioService: UsuarioService,
-                private confirmationService: ConfirmationService,
-                private messageService: MessageService,
-                private router: Router) { }
+        private estadisticaService: EstadisticaService,
+        private systemService: SystemService,
+        private usuarioService: UsuarioService,
+        private confirmationService: ConfirmationService,
+        private messageService: MessageService,
+        private router: Router,
+        private reportesService: ReportesService) { }
 
     ngOnInit() {
 
@@ -93,36 +95,36 @@ export class DashboardComponent implements OnInit {
 
     }
 
-    public dataCardsVotos(){
+    public dataCardsVotos() {
         this.estadisticaService.obtenerDatosCardsVotos()
-            .subscribe( (resp) => {
-                
-                this.total_votos    = resp;
-                
-            })
-    }
-    
-    public dataCardsAvance(){
-        this.estadisticaService.obtenerDatosCardsBoletas()
-            .subscribe( ( porcentaje_avance ) => {
-                // console.log({distrital_original, distrital_copia, electronicas, total});
-                
-                this.avance_votacion = porcentaje_avance;
-                
+            .subscribe((resp) => {
+
+                this.total_votos = resp;
+
             })
     }
 
-    public dataTablaResultadoVotacion(){
+    public dataCardsAvance() {
+        this.estadisticaService.obtenerDatosCardsBoletas()
+            .subscribe((porcentaje_avance) => {
+                // console.log({distrital_original, distrital_copia, electronicas, total});
+
+                this.avance_votacion = porcentaje_avance;
+
+            })
+    }
+
+    public dataTablaResultadoVotacion() {
         this.estadisticaService.obtenerDatosTabla()
-            .subscribe( (resp: any) => {
+            .subscribe((resp: any) => {
 
                 console.log(resp);
 
                 this.res_voto = resp.data_tabla_avance_captura;
 
                 console.log(this.res_voto);
-                
-                
+
+
 
                 /* let avance = 0;
                 resp.data_tabla_avance_captura.forEach(element => {
@@ -131,7 +133,7 @@ export class DashboardComponent implements OnInit {
                     // console.log(element);
                     this.data_tabla_avance_captura_distrital.push(element);
                 }); */
-                
+
             })
     }
 
@@ -145,11 +147,11 @@ export class DashboardComponent implements OnInit {
             acceptLabel: 'Si, reiniciar',
             accept: () => {
                 this.systemService.reiniciarVotacion()
-                    .subscribe( (res: any) => {
-                        if(res.ok){
+                    .subscribe((res: any) => {
+                        if (res.ok) {
                             this.dataCardsVotos();
                             this.dataCardsAvance();
-                            this.messageService.add({severity:'info', summary:'Confirmado', detail:'La votación se ha reiniciado. Deberás configurar  los periodos de votación'});
+                            this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'La votación se ha reiniciado. Deberás configurar  los periodos de votación' });
                             setTimeout(() => {
                                 this.router.navigateByUrl('/administracion-sistema/configuracion-sistema');
                             }, 3000);
@@ -157,20 +159,27 @@ export class DashboardComponent implements OnInit {
                     })
             },
             reject: (type) => {
-                switch(type) {
+                switch (type) {
                     case ConfirmEventType.REJECT:
-                        this.messageService.add({severity:'error', summary:'Rechazado', detail:'Rechazaste el reinicio de la votación'});
-                    break;
+                        this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Rechazaste el reinicio de la votación' });
+                        break;
                     case ConfirmEventType.CANCEL:
-                        this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Has cancelado el reinicio de la votación'});
-                    break;
+                        this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Has cancelado el reinicio de la votación' });
+                        break;
                 }
             },
             key: "positionDialog"
         });
     }
 
-    reporte(){
-        alert("Descarga de reporte")
+    reporte() {
+        this.reportesService.rptTotalVotacion()
+            .subscribe( (res: any) => {
+
+                console.log('Reporte descargado!');
+                // window.open(reporte.reporte, '_blank')
+                window.open('http://' + res.reporte, '_parent', 'download');
+
+            })
     }
 }

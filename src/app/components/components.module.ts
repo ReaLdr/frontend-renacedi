@@ -17,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgChartsModule } from 'ng2-charts';
-import { ReportesComponent } from './reportes/reportes.component';
 import { GraficasComponent } from './graficas/graficas.component';
 import { ListadoBoletasDistritalesComponent } from './listado-boletas-distritales/listado-boletas-distritales.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
@@ -38,7 +37,6 @@ import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-c
     DashboardComponent,
     LoginComponent,
     HeaderComponent,
-    ReportesComponent,
     GraficasComponent,
     ListadoBoletasDistritalesComponent,
     ConfiguracionComponent,

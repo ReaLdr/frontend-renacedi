@@ -4,7 +4,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AppMainComponent } from './app.main.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
-import { ReportesComponent } from './components/reportes/reportes.component';
 import { AdminGuard } from './guards/admin.guard';
 // import { CapturaActasComponent } from './components/captura-actas/captura-actas.component';
 import { GraficasComponent } from './components/graficas/graficas.component';

@@ -39,7 +39,7 @@
 <div class="grid p-fluid">
     <div class="col-12">
 
-        <p-toolbar class="p-1">
+        <p-toolbar class="p-1" *ngIf="total_votos > 0">
             <div class="p-toolbar-group-left">
                 <p-button label="Reiniciar votación" (click)="confirmReinicio('right');" icon="pi pi-refresh" styleClass="p-button-danger"></p-button>
             </div>

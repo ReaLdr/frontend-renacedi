@@ -110,6 +110,12 @@ export class Boleta1Component implements OnInit {
 
     let now = new Date().getTime();
     let distance = this.countDownDate - now;
+   /*  console.log({now,
+      distance}); */
+    
+    // ORIGINAL
+    /* let now = new Date().getTime();
+    let distance = this.countDownDate - now; */
 
     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -122,6 +128,10 @@ export class Boleta1Component implements OnInit {
     (days === 1 ? txtDias = ' Día' : txtDias = ' Días');
     let txtMinutos = '';
     (minutes === 1 ? txtMinutos = ' Minuto' : txtMinutos = ' Minutos');
+
+    if(minutes <= 2){
+      this.severity_coundown = 'danger';
+    }
 
     // console.log(distance);
     // this.demo = `${days} ${txtDias} ${hours} ${txtHoras} ${minutes} ${txtMinutos} con ${seconds} Segundos`;
@@ -160,24 +170,14 @@ export class Boleta1Component implements OnInit {
       .subscribe((res: any) => {
 
         if (res.ok) {
-          const { id_configuracion,
-            fecha_inicio,
-            fecha_termino,
-            estado } = res.configuracionActivaDB;
+          
+          const { id_configuracion, fecha_inicio, fecha_termino, estado } = res.configuracionActivaDB;
           this.estado_sistema = estado;
           this.fecha_inicio = fecha_inicio;
           this.fecha_termino = new Date(fecha_termino).getTime();
-          this.fecha_actual = res.fecha_hora_server;
+          this.fecha_actual = new Date(res.fecha_hora_server).getTime();
           // console.log({ fecha: res.fecha_hora_server });
-          this.countDownDate = new Date(fecha_termino).getTime();
-
-          //console.log(this.countDownDate);
-
-
-          //console.log(this.fecha_termino);
-
-          // new Date("may 30, 2022 15:30:00").getTime()
-          // console.log(res.configuracionActivaDB);
+          this.countDownDate = new Date(res.fecha_hora_termina).getTime();
 
         }
 

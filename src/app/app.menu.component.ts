@@ -12,7 +12,7 @@ import { UsuarioService } from './service/usuario.service';
         <div class="layout-menu-container">
             <ul class="layout-menu" role="menu" (keydown)="onKeydown($event)">
                 <li app-menu class="layout-menuitem-category" *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true" role="none">
-                    <div class="layout-menuitem-root-text" [attr.aria-label]="item.label">{{item.label}}</div>
+                    <div class="layout-menuitem-root-text" [attr.aria-label]="item.label">{{item.label}} <p-badge value="" severity="danger" pTooltip="Sin configuración de votación" placeholder="Right" styleClass="mr-2"></p-badge></div>
                     <ul role="menu">
                         <li app-menuitem *ngFor="let child of this.menuService.menu" [item]="child" [index]="i" role="none"></li>
                     </ul>

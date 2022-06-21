@@ -23,10 +23,8 @@ export class ReportesService {
     }
   }
 
-  rptSistematizacionBoletas(id_distrito: number){
-    console.log({id_distrito});
-    
-    const url = `${base_url}/reportes/rpt-sistematizacion-boletas/${id_distrito}`;
+  rptTotalVotacion(){
+    const url = `${base_url}/reportes/rpt-total-votos`;
     return this.http.get( url, this.headers );
   }
 
