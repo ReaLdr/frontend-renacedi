@@ -98,6 +98,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           Swal.fire('Ups', err.error.msg, 'info');
         } else if(err.error.flag === 3) {
           Swal.fire('Ups', err.error.msg, 'warning');
+        } else if(err.error.flag === 4) {
+          Swal.fire('Ups', err.error.msg, 'warning');
         } else{
           Swal.fire('Error', err.error.msg, 'error');
         }

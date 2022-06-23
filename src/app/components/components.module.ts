@@ -25,6 +25,7 @@ import { CargaCatalogosComponent } from './carga-catalogos/carga-catalogos.compo
 import { EnviaCorreosComponent } from './envia-correos/envia-correos.component';
 import { ActivarCuentaComponent } from './activar-cuenta/activar-cuenta.component';
 import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-contrasena.component';
+import { GenerarTokenComponent } from './generar-token/generar-token.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-c
     EnviaCorreosComponent,
     ActivarCuentaComponent,
     RecuperarContrasenaComponent,
+    GenerarTokenComponent,
   ],
   imports: [
     CommonModule,

@@ -40,6 +40,7 @@ export class ActivarCuentaComponent implements OnInit {
     correo: ['', [Validators.required, Validators.email]],
     contrasena: ['', [Validators.required, Validators.minLength(8)]],
     confirmar_contrasena: ['', [Validators.required, Validators.minLength(8)]],
+    token_mail: ['', [Validators.required, Validators.minLength(30)]]
   });
 
   correo_param: string = '';
@@ -50,19 +51,18 @@ export class ActivarCuentaComponent implements OnInit {
   nombre_sistema: string = environment.nombre_sistema;
 
   constructor( private fb: FormBuilder,
-               private activatedRoute: ActivatedRoute,
+              //  private activatedRoute: ActivatedRoute,
                private usuarioService: UsuarioService,
                private router: Router) {
     
-    this.activatedRoute.params.subscribe( ({correo}) => {
-      console.log(correo);
-      
+/*     this.activatedRoute.params.subscribe( ({correo}) => {
       this.activarCuentaForm.get('correo').setValue(correo);
-    })
+    }) */
 
   }
 
   ngOnInit(): void {
+    this.activarCuentaForm.get('correo').setValue(localStorage.getItem('correo'));
   }
 
   crearContrasena(){
@@ -77,6 +77,8 @@ export class ActivarCuentaComponent implements OnInit {
       .subscribe( (resp: any) => {
         
         if(resp.ok){
+
+          localStorage.removeItem('correo');
 
           Swal.fire({
             icon: 'success',

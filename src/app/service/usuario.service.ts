@@ -99,4 +99,8 @@ export class UsuarioService {
     return this.http.post(`${base_url}/correo/olvide-contrasena`, data);
   }
 
+  generarTokenMail( data ){
+    return this.http.put( `${base_url}/usuarios/token-mail`, data );
+  }
+
 }

@@ -19,6 +19,7 @@ import { CargaCatalogosComponent } from './components/carga-catalogos/carga-cata
 import { EnviaCorreosComponent } from './components/envia-correos/envia-correos.component';
 import { ActivarCuentaComponent } from './components/activar-cuenta/activar-cuenta.component';
 import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
+import { GenerarTokenComponent } from './components/generar-token/generar-token.component';
 
 const routes: Routes = [
     {
@@ -33,6 +34,10 @@ const routes: Routes = [
     {
         path: 'login-admin',
         component: AdminLoginComponent
+    },
+    {
+        path: 'generar-token',
+        component: GenerarTokenComponent
     },
     {
         path: 'activar-cuenta',

@@ -129,7 +129,7 @@ export class Boleta1Component implements OnInit {
     let txtMinutos = '';
     (minutes === 1 ? txtMinutos = ' Minuto' : txtMinutos = ' Minutos');
 
-    if(minutes <= 2){
+    if(minutes < 2){
       this.severity_coundown = 'danger';
     }
 
@@ -160,8 +160,8 @@ export class Boleta1Component implements OnInit {
     private systemService: SystemService) { }
 
   ngOnInit(): void {
-    this.obtenerEstado();
     this.obtenerFechasOperacion();
+    this.obtenerEstado();
     this.listarOpcionesBoleta();
   }
 
@@ -169,15 +169,22 @@ export class Boleta1Component implements OnInit {
     this.systemService.cargarConfiguracionActiva()
       .subscribe((res: any) => {
 
+        console.log(res);
+        
+
         if (res.ok) {
           
-          const { id_configuracion, fecha_inicio, fecha_termino, estado } = res.configuracionActivaDB;
-          this.estado_sistema = estado;
-          this.fecha_inicio = fecha_inicio;
-          this.fecha_termino = new Date(fecha_termino).getTime();
-          this.fecha_actual = new Date(res.fecha_hora_server).getTime();
-          // console.log({ fecha: res.fecha_hora_server });
-          this.countDownDate = new Date(res.fecha_hora_termina).getTime();
+          if(res.configuracionActivaDB){
+            const { id_configuracion, fecha_inicio, fecha_termino, estado } = res.configuracionActivaDB;
+            this.estado_sistema = estado;
+            this.fecha_inicio = fecha_inicio;
+            this.fecha_termino = new Date(fecha_termino).getTime();
+            this.fecha_actual = new Date(res.fecha_hora_server).getTime();
+            // console.log({ fecha: res.fecha_hora_server });
+            this.countDownDate = new Date(res.fecha_hora_termina).getTime();
+          } else{
+            this.cerrarSesion();
+          }
 
         }
 
@@ -287,7 +294,17 @@ export class Boleta1Component implements OnInit {
         }, (err) => {
           console.log(err);
           this.loading = false;
-          Swal.fire('Error', err.error.msg, 'error');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            html: err.error.msg,
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // this.router.navigateByUrl('boleta1');
+              this.cerrarSesion();
+            }
+          });
 
         });
 

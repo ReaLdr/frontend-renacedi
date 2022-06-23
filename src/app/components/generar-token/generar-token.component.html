@@ -30,40 +30,14 @@
                     </div>
                 
                     <div class="w-full md:w-10 mx-auto">
-                        <form [formGroup]="activarCuentaForm" (submit)="crearContrasena();">
+                        <form [formGroup]="generarTokenForm" (submit)="crearToken();">
                             <div class="field grid">
                                 <label for="correo" class="col-12 mb-2 md:col-3 md:mb-0">Correo</label>
                                 <div class="col-12 md:col-9">
                                     <input id="correo" type="text" formControlName="correo" maxlength="30" pInputText class="w-full mb-3" style="padding:1rem;">
                                 </div>
                             </div>
-                            <div class="field grid">
-                                <label for="contrasena" class="col-12 mb-2 md:col-3 md:mb-0">Contraseña</label>
-                                <div class="col-12 md:col-9">
-                                    <p-password promptLabel="Ingresa una contraseña" weakLabel="Contraseña débil" mediumLabel="Media" strongLabel="Fuerte" id="contrasena" formControlName="contrasena" [maxlength]="30" [toggleMask]="true" [feedback]="true" styleClass="w-full mb-3"></p-password>
-                                </div>
-                            </div>
-                            
-                            <div class="field grid">
-                                <label for="confirmar_contrasena" class="col-12 mb-2 md:col-3 md:mb-0">Confirmar contraseña</label>
-                                <div class="col-12 md:col-9">
-                                    <p-password id="confirmar_contrasena" formControlName="confirmar_contrasena" [maxlength]="30" [toggleMask]="false" [feedback]="false" styleClass="w-full mb-3"></p-password>
-                                </div>
-                            </div>
-                            <p-messages severity="warn" *ngIf="validarContrasenas();">
-                                <ng-template pTemplate>
-                                    <div class="ml-2">Las contraseñas no coinciden, favor de validar.</div>
-                                </ng-template>
-                            </p-messages>
-                            
-                            <div class="field grid">
-                                <label for="confirmar_contrasena" class="col-12 mb-2 md:col-3 md:mb-0">Token</label>
-                                <div class="col-12 md:col-9">
-                                    <input type="text" pInputText formControlName="token_mail" class="w-full mb-3">
-                                </div>
-                            </div>
-                            
-                            <button pButton pRipple [loading]="loading" iconPos="right" type="submit" [disabled]="!activarCuentaForm.valid || pass_valid" label="Ingresar" class="w-full p-3 text-xl"></button>
+                            <button pButton pRipple [loading]="loading" iconPos="right" type="submit" [disabled]="!generarTokenForm.valid" label="Ingresar" class="w-full p-3 text-xl"></button>
                         </form>
                     </div>
                 </div>

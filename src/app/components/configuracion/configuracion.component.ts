@@ -17,6 +17,9 @@ import Swal from 'sweetalert2';
     :host ::ng-deep .row-active {
       background-color: rgba(102,173,73,.15) !important;
     }
+    :host ::ng-deep .row-concluido {
+      background-color: rgba(73,104,173,.15) !important;
+    }
     `
   ]
 })
